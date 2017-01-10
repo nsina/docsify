@@ -1,3 +1,16 @@
+## 1.6.1
+### Bug fixes
+- Fixed sidebar bug when the coverpage exist
+
+## 1.6.0
+### Features
+- Improve sidebar performance. The active item is automatically scrolled in the visible view.
+- New doc helper: `! `. e.g. `! content` will be rendered as `<p class="tip">content</p>`
+
+## 1.5.2
+### Bug fixes
+- Fixed number at the beginning of the slug
+
 ## 1.5.1
 ### Bug fixes
 - Remove HTML tag when handling slug

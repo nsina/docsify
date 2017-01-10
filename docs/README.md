@@ -2,7 +2,7 @@
 
 ### Create a project
 First create a project, then create a `docs` folder
-```shell
+```bash
 mkdir my-project && cd my-project
 mkdir docs && cd docs
 ```
@@ -41,20 +41,20 @@ Push code and activate **GitHub Pages** via your repo's settings
 Easy to setup and preview a docs.
 
 ### Install
-```shell
+```bash
 npm i docsify-cli -g
 ```
 
 ### Setup
 
 Setup a boilerplate docs
-```shell
+```bash
 docsify init docs
 ```
 
 ### Preview
 Preview and serve your docs using
-```shell
+```bash
 docsify serve docs
 ```
 
@@ -156,6 +156,26 @@ window.$docsify = {
   }
 }
 ```
+
+### Doc Helpers
+#### p.tip
+
+'! ' add your content will rendered as `<p class="tip">content</p>`
+
+```markdown
+! Important **information**
+```
+
+It will be rendered
+
+```html
+<p class="tip">Important <strong>information</strong></p>
+```
+
+e.g.
+
+! Important **information**
+
 
 ## Options
 
@@ -351,11 +371,14 @@ Scroll to the top on changing hash.
 
 ```html
 <script src="/lib/docsify.js" data-auto2top></script>
+<!-- Set offset top -->
+<script src="/lib/docsify.js" data-auto2top="50"></script>
 ```
 
 ```js
 window.$docsify = {
-  auto2top: true
+  auto2top: true,
+  // auto2top: 50
 }
 ```
 

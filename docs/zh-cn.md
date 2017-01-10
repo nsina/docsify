@@ -8,7 +8,7 @@
 
 ### 创建项目
 新建一个空项目，接着创建一个 `docs` 目录并进入到 docs 目录下
-```shell
+```bash
 mkdir my-project && cd my-project
 mkdir docs && cd docs
 ```
@@ -46,20 +46,20 @@ mkdir docs && cd docs
 方便快速创建文档目录，会读取项目的 `package.json` 里的选项作为 docsify 的配置，支持本地预览。
 
 ### 安装
-```shell
+```bash
 npm i docsify-cli -g
 ```
 
 ### 初始化文档
 
 默认初始化在当前目录，推荐将文档放在 `docs` 目录下
-```shell
+```bash
 docsify init docs
 ```
 
 ### 启动本地服务
 启动一个 server 方便预览，打开 http://localhost:3000
-```shell
+```bash
 docsify serve docs
 ```
 
@@ -163,6 +163,24 @@ window.$docsify = {
 }
 ```
 
+### 文档助手
+#### 内置「提示」语法
+
+感叹号加空格，后面接内容，会渲染成带 tip 类名的段落。
+
+```markdown
+! 提示信息，**支持其他 markdown 语法**
+```
+
+将被渲染成
+
+```html
+<p class="tip">提示信息<strong>支持其他 markdown 语法</strong></p>
+```
+
+效果
+
+! 适合显示醒目的内容
 
 ## 配置参数
 
