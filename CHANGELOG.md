@@ -1,3 +1,20 @@
+## 1.7.1
+### Bug fixes
+- Fix sidebar click event in mobile browser.
+
+## 1.7.1
+### Bug fixes
+- Fix sidebar style in mobile browser.
+
+## 1.7.0
+
+### Bug fixes
+- Fixed custom cover background, fixed #52
+- Fixed sticky sidebar
+
+## Features
+- Add `name` and `nameLink`
+
 ## 1.6.1
 ### Bug fixes
 - Fixed sidebar bug when the coverpage exist

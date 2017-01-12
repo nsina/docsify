@@ -96,6 +96,7 @@ nav {
     display: inline-block;
 
     ul {
+      border-radius: 2px;
       background-color: rgba($color-bg, .6);
       border: 1px solid $color-primary;
       opacity: 0;
@@ -160,6 +161,7 @@ nav {
 
 /* main */
 main {
+  display: block;
   size: 100vw 100%;
   position: relative;
 }
@@ -180,13 +182,34 @@ main {
 
 /* sidebar */
 .sidebar {
-  border-right: 1px solid rgba(0, 0, 0, .07);
   overflow-y: auto;
   padding: 40px 0;
   position: absolute 0 * 0 0;
   transition: transform 250ms ease-out;
   width: $sidebar-width;
   z-index: 20;
+  margin-bottom: 40px;
+
+  &::after {
+    content: '';
+    position: inherit;
+    left: calc($sidebar-width - 1px);
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid rgba(0, 0, 0, .07);
+  }
+
+  > h1 {
+    text-align: center;
+    margin: 0 auto 1em;
+    font-size: 1.5em;
+    font-weight: 300;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
 
   ul {
     margin: 0;
@@ -342,6 +365,15 @@ body.close {
 @media (max-width: 600px) {
   .github-corner, .sidebar-toggle, .sidebar {
     position: fixed;
+  }
+
+  .sidebar {
+    margin-bottom: 0;
+    border-right: 1px solid rgba(0, 0, 0, .07);
+
+    &::after {
+      content: none;
+    }
   }
 
   nav {

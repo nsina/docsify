@@ -48,7 +48,7 @@ export function scrollActiveSidebar () {
 
     li.classList.add('active')
     active = li
-    !hoveredOverSidebar && sticky.isSticky && active.scrollIntoView()
+    !hoveredOverSidebar && !sticky.noSticky && active.scrollIntoView(false)
   }
 
   window.removeEventListener('scroll', highlight)
@@ -107,9 +107,9 @@ export function bindToggle (dom) {
 
   if (isMobile()) {
     const sidebar = document.querySelector('aside.sidebar')
-    document.body.addEventListener('click', e => {
-      if (e.target !== dom && !dom.contains(e.target)) body.classList.toggle('close')
-      if (sidebar.contains(e.target)) setTimeout(() => activeLink(sidebar, true), 0)
+    sidebar.addEventListener('click', () => {
+      body.classList.toggle('close')
+      setTimeout(() => activeLink(sidebar, true), 0)
     })
   }
 }
@@ -119,16 +119,16 @@ export function scroll2Top (offset = 0) {
 }
 
 export function sticky () {
-  const dom = document.querySelector('section.cover')
-  const coverHeight = dom.getBoundingClientRect().height
+  sticky.dom = sticky.dom || document.querySelector('section.cover')
+  const coverHeight = sticky.dom.getBoundingClientRect().height
 
   return (function () {
-    if (window.pageYOffset >= coverHeight || dom.classList.contains('hidden')) {
+    if (window.pageYOffset >= coverHeight || sticky.dom.classList.contains('hidden')) {
       document.body.classList.add('sticky')
-      sticky.isSticky = true
+      sticky.noSticky = false
     } else {
       document.body.classList.remove('sticky')
-      sticky.isSticky = false
+      sticky.noSticky = true
     }
   })()
 }
