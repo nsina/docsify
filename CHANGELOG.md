@@ -1,4 +1,13 @@
-## 1.7.1
+## 1.7.4
+### Bug fixes
+- Fix bugs caused by the previous version
+
+## 1.7.3
+### Bug fixes
+- Add `hr` style
+- Fixed option is an empty string
+
+## 1.7.2
 ### Bug fixes
 - Fix sidebar click event in mobile browser.
 
