@@ -1,3 +1,21 @@
+## 1.9.0
+
+### Bug fixes
+- Destroys the vue instance when the route is changed
+
+### Features
+- Add `!>` and `?>` doc helper.
+
+### Break change
+- Remove `!` doc helper.
+
+## 1.8.0
+### Bug fixes
+- Using `v-pre` skip compilation.
+
+### Features
+- Execute script when vue exists.
+
 ## 1.7.4
 ### Bug fixes
 - Fix bugs caused by the previous version

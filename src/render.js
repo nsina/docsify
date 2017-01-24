@@ -8,7 +8,6 @@ let OPTIONS = {}
 let markdown = marked
 let toc = []
 const CACHE = {}
-const TIP_RE = /^!\s/
 
 const renderTo = function (dom, content) {
   dom = typeof dom === 'object' ? dom : document.querySelector(dom)
@@ -56,8 +55,12 @@ export function init (options) {
     return `<a href="${href}" title="${title || ''}">${text}</a>`
   }
   renderer.paragraph = function (text) {
-    const isTip = TIP_RE.test(text)
-    return isTip ? `<p class="tip">${text.replace(TIP_RE, '')}</p>` : `<p>${text}</p>`
+    if (/^!&gt;/.test(text)) {
+      return tpl.helper('tip', text)
+    } else if (/^\?&gt;/.test(text)) {
+      return tpl.helper('warn', text)
+    }
+    return `<p>${text}</p>`
   }
 
   if (typeof OPTIONS.markdown === 'function') {
@@ -98,9 +101,15 @@ export function renderArticle (content) {
   renderTo('article', content ? markdown(content) : 'not found')
   if (!OPTIONS.sidebar && !OPTIONS.loadSidebar) renderSidebar()
 
-  if (content && typeof Vue !== 'undefined' && typeof Vuep !== 'undefined') {
-    const vm = new Vue({ el: 'main' }) // eslint-disable-line
-    vm.$nextTick(_ => event.scrollActiveSidebar())
+  if (content && typeof Vue !== 'undefined') {
+    const script = content.match('<script[^>]*?>([^<]+)</script>')
+
+    script && document.body.querySelector('article script').remove()
+    CACHE.vm && CACHE.vm.$destroy()
+    CACHE.vm = script
+      ? new Function(`return ${script[1].trim()}`)()
+      : new Vue({ el: 'main' }) // eslint-disable-line
+    CACHE.vm && CACHE.vm.$nextTick(_ => event.scrollActiveSidebar())
   }
   if (OPTIONS.auto2top) setTimeout(() => event.scroll2Top(OPTIONS.auto2top), 0)
 }
