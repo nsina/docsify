@@ -2,7 +2,7 @@ import marked from 'marked'
 import Prism from 'prismjs'
 import * as tpl from './tpl'
 import * as event from './event'
-import { genTree, getRoute, isMobile, slugify, merge } from './util'
+import { genTree, getRoute, isMobile, slugify, merge, emojify } from './util'
 
 let OPTIONS = {}
 let markdown = marked
@@ -45,7 +45,7 @@ export function init (options) {
   renderer.code = function (code, lang = '') {
     const hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup)
 
-    return `<pre v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
+    return `<pre v-pre data-lang="${lang}"><code class="lang-${lang}">${hl.replace(/:/g, '__colon__')}</code></pre>`
   }
   renderer.link = function (href, title, text) {
     if (OPTIONS.router && !/:/.test(href)) {
@@ -69,6 +69,10 @@ export function init (options) {
   } else {
     markdown.setOptions(merge({ renderer }, OPTIONS.markdown))
   }
+
+  const md = markdown
+
+  markdown = text => emojify(md(text))
 }
 
 /**

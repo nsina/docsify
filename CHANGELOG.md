@@ -1,3 +1,15 @@
+## 1.10.2
+### Bug fixes
+- Fix render emojis again
+
+## 1.10.1
+### Bug fixes
+- Fix render emojis
+
+## 1.10.0
+### Features
+- Support emoji :laughing:
+
 ## 1.9.0
 
 ### Bug fixes
