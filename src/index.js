@@ -7,16 +7,14 @@ const OPTIONS = merge({
   repo: '',
   maxLevel: 6,
   subMaxLevel: 0,
-  sidebar: '',
-  sidebarToggle: false,
   loadSidebar: null,
   loadNavbar: null,
-  router: false,
   homepage: 'README.md',
   coverpage: '',
   basePath: '',
   auto2top: false,
   name: '',
+  themeColor: '',
   nameLink: window.location.pathname
 }, window.$docsify)
 const script = document.currentScript || [].slice.call(document.getElementsByTagName('script')).pop()
@@ -32,8 +30,10 @@ if (script) {
   if (OPTIONS.coverpage === true) OPTIONS.coverpage = '_coverpage.md'
   if (OPTIONS.repo === true) OPTIONS.repo = ''
   if (OPTIONS.name === true) OPTIONS.name = ''
-  if (OPTIONS.sidebar) OPTIONS.sidebar = window[OPTIONS.sidebar]
 }
+
+// utils
+window.__docsify__ = OPTIONS
 
 // load options
 render.init(OPTIONS)
@@ -105,10 +105,8 @@ const Docsify = function () {
   // Render app
   render.renderApp(dom, replace)
   main()
-  if (OPTIONS.router) {
-    if (!/^#\//.test(window.location.hash)) window.location.hash = '#/'
-    window.addEventListener('hashchange', main)
-  }
+  if (!/^#\//.test(window.location.hash)) window.location.hash = '#/'
+  window.addEventListener('hashchange', main)
 }
 
 export default Docsify()

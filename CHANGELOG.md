@@ -1,3 +1,19 @@
+## 2.0.2
+
+### Bug fixes
+- fix button style in cover page.
+
+## 2.0.1
+### Bug fixes
+- border style.
+
+## 2.0.0
+### Features
+- Customize the theme color
+
+### Break change
+- Remove `data-router`, `data-sidebar`, `data-sidebar-toggle` APIs
+
 ## 1.10.5
 ### Bug fixes
 - fix initialize the Vue instance
