@@ -1,3 +1,22 @@
+## 2.2.0
+
+### Features
+- Add `Google Analytics` plugin.
+```html
+<script src="//unpkg.com/docsify" data-ga="UA-XXXXX-Y"></script>
+<script src="//unpkg.com/docsify/lib/plugins/ga.js"></script>
+```
+## 2.1.0
+### Features
+- Add search plugin
+```html
+<script src="//unpkg.com/docsify"></script>
+<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+```
+
+### Bug fixes
+- fix sidebar style
+
 ## 2.0.3
 ### Bug fixes
 - fix: rendering emojis
