@@ -10,6 +10,7 @@ export function scrollActiveSidebar () {
   let hoveredOverSidebar = false
   const anchors = document.querySelectorAll('.anchor')
   const sidebar = document.querySelector('.sidebar')
+  const sidebarContainer = sidebar.querySelector('.sidebar-nav')
   const sidebarHeight = sidebar.clientHeight
 
   const nav = {}
@@ -18,7 +19,9 @@ export function scrollActiveSidebar () {
 
   for (let i = 0, len = lis.length; i < len; i += 1) {
     const li = lis[i]
-    let href = li.querySelector('a').getAttribute('href')
+    const a = li.querySelector('a')
+    if (!a) continue
+    let href = a.getAttribute('href')
 
     if (href !== '/') {
       const match = href.match('#([^#]+)$')
@@ -57,12 +60,12 @@ export function scrollActiveSidebar () {
       const currentPageOffset = 0
       const currentActiveOffset = active.offsetTop + active.clientHeight + 40
       const currentActiveIsInView = (
-        active.offsetTop >= sidebar.scrollTop &&
-        currentActiveOffset <= sidebar.scrollTop + sidebarHeight
+        active.offsetTop >= sidebarContainer.scrollTop &&
+        currentActiveOffset <= sidebarContainer.scrollTop + sidebarHeight
       )
       const linkNotFurtherThanSidebarHeight = currentActiveOffset - currentPageOffset < sidebarHeight
       const newScrollTop = currentActiveIsInView
-        ? sidebar.scrollTop
+        ? sidebarContainer.scrollTop
         : linkNotFurtherThanSidebarHeight
           ? currentPageOffset
           : currentActiveOffset - sidebarHeight
@@ -134,8 +137,10 @@ export function bindToggle (dom) {
   }
 }
 
+const scrollingElement = document.scrollingElement || document.documentElement
+
 export function scroll2Top (offset = 0) {
-  document.body.scrollTop = offset === true ? 0 : Number(offset)
+  scrollingElement.scrollTop = offset === true ? 0 : Number(offset)
 }
 
 export function sticky () {

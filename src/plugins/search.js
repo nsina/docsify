@@ -44,8 +44,7 @@ const getAllPaths = function () {
 /**
  * return file path
  */
-const genFilePath = function (path) {
-  const basePath = window.$docsify.basePath
+const genFilePath = function (path, basePath = window.$docsify.basePath) {
   let filePath = /\/$/.test(path) ? `${path}README.md` : `${path}.md`
 
   filePath = basePath + filePath
@@ -76,6 +75,7 @@ const genIndex = function (path, content = '') {
         slug = `#/${path}#${id}`.replace(/\/+/, '/')
         INDEXS[slug] = { slug, title: text, body: '' }
       } else {
+        if (!slug) return
         // other html tag
         if (!INDEXS[slug]) {
           INDEXS[slug] = {}
@@ -180,9 +180,11 @@ class SearchComponent {
   }
 
   bindEvent () {
-    const input = document.querySelector('.search input')
-    const panel = document.querySelector('.results-panel')
+    const search = document.querySelector('.search')
+    const input = search.querySelector('.search input')
+    const panel = search.querySelector('.results-panel')
 
+    search.addEventListener('click', e => e.target.tagName !== 'A' && e.stopPropagation())
     input.addEventListener('input', e => {
       const target = e.target
 
@@ -291,6 +293,7 @@ const searchPlugin = function () {
   const paths = isAuto ? getAllPaths() : CONFIG.paths
   const len = paths.length
   const { load, marked, slugify } = window.Docsify.utils
+  const alias = window.$docsify.alias
   const done = () => {
     localStorage.setItem('docsify.search.expires', Date.now() + CONFIG.maxAge)
     localStorage.setItem('docsify.search.index', JSON.stringify(INDEXS))
@@ -298,8 +301,16 @@ const searchPlugin = function () {
 
   paths.forEach(path => {
     if (INDEXS[path]) return count++
+    let route
 
-    load(genFilePath(path)).then(content => {
+    // replace route
+    if (alias && alias[path]) {
+      route = genFilePath(alias[path] || path, '')
+    } else {
+      route = genFilePath(path)
+    }
+
+    load(route).then(content => {
       genIndex(path, marked(content))
       slugify.clear()
       count++
@@ -310,12 +321,8 @@ const searchPlugin = function () {
 }
 
 const install = function () {
-  if (!window.Docsify || !window.Docsify.installed) {
-    console.error('[Docsify] Please load docsify.js first.')
-    return
-  }
-
-  window.$docsify.plugins = [].concat(window.$docsify.plugins, searchPlugin)
+  if (install.installed) return
+  install.installed = true
 
   const userConfig = window.$docsify.search
   const isNil = window.Docsify.utils.isNil
@@ -328,7 +335,15 @@ const install = function () {
     CONFIG.placeholder = userConfig.placeholder || CONFIG.placeholder
   }
 
-  new SearchComponent()
+  window.$docsify.plugins = [].concat(hook => {
+    const isAuto = CONFIG.paths === 'auto'
+
+    hook.ready(() => {
+      new SearchComponent()
+      !isAuto && searchPlugin()
+    })
+    isAuto && hook.doneEach(searchPlugin)
+  }, window.$docsify.plugins)
 }
 
 export default install()
