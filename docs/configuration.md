@@ -111,7 +111,7 @@ Add TOC in custom sidebar.
 
 ```js
 window.$docsify = {
-  subMaxLevel: 3
+  subMaxLevel: 2
 }
 ```
 
@@ -219,6 +219,17 @@ See [Markdown configuration](/markdown).
 
 ```js
 window.$docsify = {
+  // object
+  markdown: {
+    smartypants: true,
+    renderer: {
+      link: function() {
+        // ...
+      }
+    }
+  },
+
+  // function
   markdown: function (marked, renderer) {
     // ...
     return marked
@@ -254,3 +265,38 @@ window.$docsify = {
   }
 }
 ```
+
+## auto-header
+
+- type: `Boolean`
+
+If `loadSidebar` and `autoHeader` are both enabled, for each link in _sidebar.md, prepend a header to the page before converting it to html. [#78](https://github.com/QingWei-Li/docsify/issues/78)
+
+```js
+window.$docsify = {
+  loadSidebar: true,
+  autoHeader: true
+}
+```
+
+## execute-script
+
+- type: `Boolean`
+
+Execute the script on the page. Only parse the first script tag([demo](themes)).  If Vue is present, it is turned on by default.
+
+```js
+window.$docsify = {
+  executeScript: true
+}
+```
+
+```markdown
+## This is test
+
+<script>
+  console.log(2333)
+</script>
+
+```
+

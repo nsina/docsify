@@ -23,7 +23,13 @@ By default, the hyperlink on the current page is recognized and the content is s
     search: {
       maxAge: 86400000, // Expiration time, the default one day
       paths: [], // or 'auto'
-      placeholder: 'Type to search'
+      placeholder: 'Type to search',
+
+      // Localization
+      placeholder: {
+        '/zh-cn/': '搜索',
+        '/': 'Type to search'
+      }
     }
   }
 </script>
@@ -65,7 +71,7 @@ The hook supports handling asynchronous tasks.
 ```js
 window.$docsify = {
  plugins: [
-  function (hook) {
+  function (hook, vm) {
     hook.init(function() {
       // Called when the script starts running, only trigger once, no arguments,
     })
@@ -89,15 +95,19 @@ window.$docsify = {
       // ...
     })
 
+    hook.mounted(function() {
+      // Called after initial completion. Only trigger once, no arguments.
+    })
+
     hook.ready(function() {
-      // Called after initialization is complete. Only trigger once, no arguments.
+      // Called after initial completion, no arguments.
     })
   }
  ]
 }
 ```
 
-!> You can get internal methods through `window.Docsify.utils`.
+!> You can get internal methods through `window.Docsify`. Get the current instance through the second argument.
 
 #### Example
 

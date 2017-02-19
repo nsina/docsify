@@ -108,12 +108,12 @@ window.$docsify = {
 - 类型：`Number`
 - 默认值: `0`
 
-自定义侧边栏后默认不会再生成目录，你也可以通过设置生成目录的最大层级开启这个功能，
+自定义侧边栏后默认不会再生成目录，你也可以通过设置生成目录的最大层级开启这个功能。
 
 
 ```js
 window.$docsify = {
-  subMaxLevel: 3
+  subMaxLevel: 2
 }
 ```
 
@@ -212,12 +212,23 @@ window.$docsify = {
 
 ## markdown
 
-- 类型: `Function`
+- 类型: `Object|Function`
 
 参考 [Markdown 配置](/zh-cn/markdown)。
 
 ```js
 window.$docsify = {
+  // object
+  markdown: {
+    smartypants: true,
+    renderer: {
+      link: function() {
+        // ...
+      }
+    }
+  },
+
+  // function
   markdown: function (marked, renderer) {
     // ...
     return marked
@@ -229,7 +240,7 @@ window.$docsify = {
 
 - 类型：`String`
 
-替换主题色。利用 [CSS3 支持变量]((https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)的特性，对于老的浏览器有 polyfill 处理。
+替换主题色。利用 [CSS3 支持变量](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)的特性，对于老的浏览器有 polyfill 处理。
 
 ```js
 window.$docsify = {
@@ -251,5 +262,39 @@ window.$docsify = {
     '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG'
   }
 }
+```
+
+## auto-header
+
+- 类型：`Boolean`
+
+同时设置 `loadSidebar` 和 `autoHeader` 后，可以根据 `_sidebar.md` 的内容自动为每个页面增加标题。[#78](https://github.com/QingWei-Li/docsify/issues/78)
+
+```js
+window.$docsify = {
+  loadSidebar: true,
+  autoHeader: true
+}
+```
+
+## execute-script
+
+- 类型：`Boolean`
+
+执行文档里的 script 标签里的脚本，只执行第一个 script ([demo](zh-cn/themes))。 如果 Vue 存在，则自动开启。
+
+```js
+window.$docsify = {
+  executeScript: true
+}
+```
+
+```markdown
+## This is test
+
+<script>
+  console.log(2333)
+</script>
+
 ```
 

@@ -2,9 +2,9 @@
 
 ## 内置插件
 
-### 全文检索 - Search
+### 全文搜索 - Search
 
-全文检索插件会根据当前页面上的超链接获取文档内容，在 `localStorage` 内建立文档索引。默认过期时间为一天，当然我们可以自己指定需要缓存的文件列表或者配置过期时间。
+全文搜索插件会根据当前页面上的超链接获取文档内容，在 `localStorage` 内建立文档索引。默认过期时间为一天，当然我们可以自己指定需要缓存的文件列表或者配置过期时间。
 
 
 ```html
@@ -23,7 +23,13 @@
     search: {
       maxAge: 86400000, // 过期时间，单位毫秒，默认一天
       paths: [], // or 'auto'
-      placeholder: 'Type to search'
+      placeholder: 'Type to search',
+
+      // 支持本地化
+      placeholder: {
+        '/zh-cn/': '搜索',
+        '/': 'Type to search'
+      }
     }
   }
 </script>
@@ -61,7 +67,7 @@ docsify 提供了一套插件机制，其中提供的钩子（hook）支持处�
 ```js
 window.$docsify = {
  plugins: [
-  function (hook) {
+  function (hook, vm) {
     hook.init(function() {
       // 初始化时调用，只调用一次，没有参数。
     })
@@ -84,15 +90,19 @@ window.$docsify = {
       // ...
     })
 
+    hook.mounted(function() {
+      // 初始化完成后调用 ，只调用一次，没有参数。
+    })
+
     hook.ready(function() {
-      // 初始化完成后调用，只调用一次，没有参数。
+      // 初始化并第一次加完成数据后调用，没有参数。
     })
   }
  ]
 }
 ```
 
-!> 如果需要用 docsify 的内部方法，可以通过 `window.Docsify.utils` 获取。
+!> 如果需要用 docsify 的内部方法，可以通过 `window.Docsify` 获取，通过 `vm` 获取当前实例。
 
 #### 例子
 

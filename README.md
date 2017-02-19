@@ -20,11 +20,11 @@
 
 ## Features
 - Not build static html files
-- Simple and lightweight (~13kB gzipped)
+- Simple and lightweight (~14kB gzipped)
 - Smart full-text search plugin
 - Multiple themes
 - Useful plugin API
-- Compatible with IE9+
+- Compatible with IE10+
 
 ## Quick start
 Create a `index.html`.
@@ -52,7 +52,7 @@ Modern browsers and Internet Explorer 9+.
 ## Showcase
 These open-source projects are using docsify to generate their sites. Pull requests welcome : )
 
-- [Snipaste](https://docs.snipaste.com/) - A new way to boost your productivity.
+- [Snipaste](https://docs.snipaste.com/) - Snip & Paste
 - [puck](https://puck.zz173.com/) - A small & magical php framework.
 - [Samaritan](http://samaritan.stockdb.org) - An Algorithmic Trading Framework for Digital Currency.
 - [Vudash](http://vudash.github.io/vudash/) - Powerful, Flexible, Open Source dashboards for anything

@@ -1,90 +1,32 @@
-### 2.4.2
 
-> 2017-02-14
+3.0.3 / 2017-02-19
+==================
 
-#### Bug fixes
-- fix(index): load file path error
+  * fixed look of links in blockquote
+  * fix(scroll) highlight bug
 
+3.0.2 / 2017-02-19
+==================
 
-### 2.4.1
+  * fix(search): add lazy input
+  * fix(compiler): link
 
-> 2017-02-13
+3.0.1 / 2017-02-19
+==================
 
-#### Bug fixes
-- fix(index): cover page
+  * fix(route): empty alias
 
-### 2.4.0
+3.0.0 / 2017-02-19
+==================
 
-> 2017-02-13
-
-#### Features
-
-- feat(hook): add `doneEach`
-
-
-### 2.3.0
-
-> 2017-02-13
+#### Breaking change
+- Not support IE9
+- The route becomes: `/#/page?id=slug`. The previous route will be redirected
 
 #### Features
-
-- feat(src): add alias feature
-- docs: update all documents
-- feat(src): dynamic title
-- feat(hook): support custom plugin
-- feat(themes): add dark theme
-
-#### Bug fixes
-- fix(event): `auto2top` has no effect on a FF mobile browser, fixed #67
-- fix: sidebar style
-- fix(render): fix render link
-
-### 2.2.1
-
-> 2017-02-11
-
-#### Bug fixes
-- fix(search): crash when not content, fixed #68
-- fix(event): scroll active sidebar
-- fix(search): not work in mobile
-
-### 2.2.0
-
-#### Features
-- Add `Google Analytics` plugin.
-```html
-<script src="//unpkg.com/docsify" data-ga="UA-XXXXX-Y"></script>
-<script src="//unpkg.com/docsify/lib/plugins/ga.js"></script>
-```
-
-### 2.1.0
-#### Features
-- Add search plugin
-```html
-<script src="//unpkg.com/docsify"></script>
-<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
-```
-
-#### Bug fixes
-- fix sidebar style
-
-### 2.0.3
-#### Bug fixes
-- fix: rendering emojis
-- fix: css var polyfill
-
-### 2.0.2
-
-#### Bug fixes
-- fix button style in cover page.
-
-### 2.0.1
-#### Bug fixes
-- border style.
-
-### 2.0.0
-#### Features
-- Customize the theme color
-
-#### Break change
-- Remove `data-router`, `data-sidebar`, `data-sidebar-toggle` APIs
+- Faster rendering
+- Clearer source code
+- More powerful API
+- Auto header for each page [#78](https://github.com/QingWei-Li/docsify/issues/78)
+- Localization for search plugin [#80](https://github.com/QingWei-Li/docsify/issues/80)
+- Execute the script in markdown (see `executeScript`)
