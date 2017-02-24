@@ -2,7 +2,7 @@ import marked from 'marked'
 import Prism from 'prismjs'
 import { helper as helperTpl, tree as treeTpl } from './tpl'
 import { genTree } from './gen-tree'
-import { slugify, clearSlugCache } from './slugify'
+import { slugify } from './slugify'
 import { emojify } from './emojify'
 import { toURL, parse } from '../route/hash'
 import { getBasePath, isAbsolutePath, getPath } from '../route/util'
@@ -12,7 +12,7 @@ let markdownCompiler = marked
 let contentBase = ''
 let currentPath = ''
 let renderer = new marked.Renderer()
-const TOC = {}
+const cacheTree = {}
 let toc = []
 
 /**
@@ -25,7 +25,7 @@ export const markdown = cached(text => {
 
   html = markdownCompiler(text)
   html = emojify(html)
-  clearSlugCache()
+  slugify.clear()
 
   return html
 })
@@ -120,11 +120,9 @@ export function sidebar (text, level) {
 export function subSidebar (el, level) {
   if (el) {
     toc[0] && toc[0].level === 1 && toc.shift()
-    const tree = genTree(TOC[currentPath] || toc, level)
+    const tree = cacheTree[currentPath] || genTree(toc, level)
     el.parentNode.innerHTML += treeTpl(tree, '<ul class="app-sub-sidebar">')
-  }
-  if (toc.length) {
-    TOC[currentPath] = toc.slice()
+    cacheTree[currentPath] = tree
   }
   toc = []
 }

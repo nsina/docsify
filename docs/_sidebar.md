@@ -7,14 +7,16 @@
 - Customization
   - [Configuration](/configuration)
   - [Themes](/themes)
-  - [Using plugins](/plugins)
+  - [List of Plugins](/plugins)
+  - [Write a Plugin](/write-a-plugin)
   - [Markdown configuration](/markdown)
-  - [Lanuage highlight](/language-highlight)
+  - [Lanuage highlighting](/language-highlight)
 
 - Guide
  - [Deploy](/deploy)
- - [Doc helper](/helpers)
- - [Compatible Vue](/vue)
+ - [Helpers](/helpers)
+ - [Vue compatibility](/vue)
  - [CDN](/cdn)
+ - [Offline Mode(PWA)<sup style="color: #F44336;">new</sup>](/pwa)
 
 - [Changelog](/changelog)

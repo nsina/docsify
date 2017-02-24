@@ -1,4 +1,31 @@
 
+3.1.1 / 2017-02-24
+==================
+
+  * fix(search): dont search nameLink, fixed #102
+  * fix(render): custom cover background image
+  * fix(tpl): extra character, fixed #101
+
+3.1.0 / 2017-02-22
+==================
+
+  * fix(search): incorrect anchor link, fixed #90
+  * feat(emoji): add emoji plugin
+
+3.0.5 / 2017-02-21
+==================
+
+  * feat(pwa): add sw.js
+  * fix(layout.css): loading style
+  * fix(event): highlight sidebar when clicked, fixed #86
+  * fix(gen-tree): cache toc list, fixed #88
+
+3.0.4 / 2017-02-20
+==================
+
+  * fix(render): execute script
+  * fix(render): disable rendering sub list when loadSidebar is false
+
 3.0.3 / 2017-02-19
 ==================
 

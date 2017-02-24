@@ -17,7 +17,7 @@ function escapeHtml (string) {
 function getAllPaths () {
   const paths = []
 
-  helper.dom.findAll('a')
+  helper.dom.findAll('a:not(data-nosearch)')
     .map(node => {
       const href = node.href
       const originHref = node.getAttribute('href')
@@ -40,13 +40,14 @@ function saveData (maxAge) {
 
 export function genIndex (path, content = '') {
   const tokens = window.marked.lexer(content)
+  const slugify = window.Docsify.slugify
   const toURL = Docsify.route.toURL
   const index = {}
   let slug
 
   tokens.forEach(token => {
     if (token.type === 'heading' && token.depth <= 2) {
-      slug = toURL(path, { id: token.text })
+      slug = toURL(path, { id: slugify(token.text) })
       index[slug] = { slug, title: token.text, body: '' }
     } else {
       if (!slug) return
@@ -61,7 +62,7 @@ export function genIndex (path, content = '') {
       }
     }
   })
-
+  slugify.clear()
   return index
 }
 
