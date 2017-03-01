@@ -34,7 +34,6 @@ markdown.renderer = renderer
 
 markdown.init = function (config = {}, base = window.location.pathname) {
   contentBase = getBasePath(base)
-  currentPath = parse().path
 
   if (isFn(config)) {
     markdownCompiler = config(marked, renderer)
@@ -107,8 +106,9 @@ export function sidebar (text, level) {
     html = markdown(text)
     html = html.match(/<ul[^>]*>([\s\S]+)<\/ul>/g)[0]
   } else {
-    const tree = genTree(toc, level)
+    const tree = cacheTree[currentPath] || genTree(toc, level)
     html = treeTpl(tree, '<ul>')
+    cacheTree[currentPath] = tree
   }
 
   return html
