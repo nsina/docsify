@@ -34,8 +34,9 @@ build({
 var plugins = [
   { name: 'search', entry: 'search/index.js', moduleName: 'Search' },
   { name: 'ga', entry: 'ga.js', moduleName: 'GA' },
-  { name: 'emoji', entry: 'emoji.js', moduleName: 'Emoji' }
-  // { name: 'front-matter', entry: 'front-matter/index.js', moduleName: 'FrontMatter' }
+  { name: 'emoji', entry: 'emoji.js', moduleName: 'Emoji' },
+  { name: 'external-script', entry: 'external-script.js', moduleName: 'ExternalScript' },
+  { name: 'front-matter', entry: 'front-matter/index.js', moduleName: 'FrontMatter' }
 ]
 
 plugins.forEach(item => {

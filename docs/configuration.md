@@ -173,7 +173,7 @@ window.$docsify = {
 - Type: `Boolean|String`
 - Default: `false`
 
-Activate the [cover feature](/cover). If ture, it will load from `_coverpage.md`.
+Activate the [cover feature](/cover). If true, it will load from `_coverpage.md`.
 
 ```js
 window.$docsify = {
@@ -306,3 +306,4 @@ window.$docsify = {
 
 ```
 
+Note that if you are running an external script, e.g. an embedded jsfiddle demo, make sure to include the [external-script](plugins?id=external-script) plugin.
