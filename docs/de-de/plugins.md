@@ -1,39 +1,39 @@
-# List of Plugins
+# Liste der Erweiterungen
 
-## Full text search
+## Volltextsuche
 
-By default, the hyperlink on the current page is recognized and the content is saved in `localStorage`. You can also specify the path to the files.
+Als Standardeinstellung werden Hyperlinks auf der aktuellen Seite erkannt und der Inhalt in `localStorage` gespeichert. Du kannst den Pfad zu den Dateien auch anpassen:
 
 
 ```html
 <script>
   window.$docsify = {
-    search: 'auto', // default
+    search: 'auto', // Standard
 
     search : [
       '/',            // => /README.md
       '/guide',       // => /guide.md
       '/get-started', // => /get-started.md
-      '/zh-cn/',      // => /zh-cn/README.md
+      '/de-de/',      // => /de-de/README.md
     ],
 
-    // complete configuration parameters
+    // vollständige Parameter für die Einstellungen
     search: {
-      maxAge: 86400000, // Expiration time, the default one day
-      paths: [], // or 'auto'
+      maxAge: 86400000, // Verfallszeit, als Standard ein Tag
+      paths: [], // oder 'auto'
       placeholder: 'Type to search',
 
-      // Localization
+      // Lokalisation
       placeholder: {
-        '/zh-cn/': '搜索',
-        '/': 'Type to search'
+        '/de-de/': 'Suche',
+        '/': 'Search'
       },
 
       noData: 'No Results!',
 
-      // Localization
+      // Lokalisation
       noData: {
-        '/zh-cn/': '找不到结果',
+        '/de-de/': 'Keine Ergebnisse',
         '/': 'No Results'
       }
     }
@@ -45,7 +45,7 @@ By default, the hyperlink on the current page is recognized and the content is s
 
 ## Google Analytics
 
-Install the plugin and configure the track id.
+Installiere diese Erweiterung und passe die track id an:
 
 ```html
 <script>
@@ -57,7 +57,7 @@ Install the plugin and configure the track id.
 <script src="//unpkg.com/docsify/lib/plugins/ga.min.js"></script>
 ```
 
-Configure by `data-ga`.
+Konfiguration über `data-ga`:
 
 ```html
 <script src="//unpkg.com/docsify/lib/docsify.min.js" data-ga="UA-XXXXX-Y"></script>
@@ -72,23 +72,23 @@ Configure by `data-ga`.
 
 ## emoji
 
-The default is to support parsing emoji. For example `:100:` will be parsed to :100:. But it is not precise because there is no matching non-emoji string. If you need to correctly parse the emoji string, you need install this plugin.
+Als Standardeinstellung werden emojis umgewandelt. Als Beispiel wird `:100:` umgewandelt in :100:. Aber das ist nicht genau, das es keine passende Nicht-emoji Zeichenfolge gibt. Solltest du emojis richtig umwandeln wollen, musst du diese Erweiterung verwenden.
 
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
 ```
 
-## External Script
+## Externes Skript
 
-If the script on the page is an external one (imports a js file via `src` attribute), you'll need this plugin to make it work.
+Wenn das Skript auf der Seite ein externes ist (eine Javascript Datei über das `src` Attribut importiert), brauchst du diese Erweiterung, damit das funktioniert.
 
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/external-script.min.js"></script>
 ```
 
-## Zoom image
+## Bilder zoomen
 
-Medium's Image Zoom. Based on [zoom-image](https://github.com/egoist/zoom-image).
+Medium's Bilderzoom. Basierend auf [zoom-image](https://github.com/egoist/zoom-image).
 
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>

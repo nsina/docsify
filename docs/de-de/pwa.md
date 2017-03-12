@@ -1,3 +1,16 @@
+# Offline Modus
+
+[Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) (PWA) sind Erfahrungen die Vorzüge des Internets mit den Vorzügen von Apps verbinden. Wir können unsere Webseite verbessern, indem wir sie mit Hilfe von service workers auch **offline** und in schlechten Netzen interagierbar machen.
+
+Sie sind sehr einfach zu verwenden.
+
+## serviceWorker erstellen
+
+Erstelle eine Datei namens `sw.js` in deinem **docsify** Verzeichnis und kopiere folgenden Code:
+
+*sw.js*
+
+```js
 /* ===========================================================
  * docsify sw.js
  * ===========================================================
@@ -81,3 +94,22 @@ self.addEventListener('fetch', event => {
     )
   }
 })
+```
+
+## Registrieren
+
+Jetzt registrieren wir die Funktion in der Datei `index.html`. Nur manche aktuellen Browser unterstützen die Funktion, wir müssen also prüfen:
+
+*index.html*
+
+```html
+<script>
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+</script>
+```
+
+## Geniessen
+
+Du kannst die Website jetzt veröffentlichen und Benutzer können sie dann vollständig offline verwenden, sobald sie einmal geladen wurde :ghost: Du kannst das jetzt ausprobieren, indem du deine Internetverbindung ausschaltest und diese Seite neu lädst.

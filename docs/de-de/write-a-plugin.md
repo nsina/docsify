@@ -1,8 +1,8 @@
-# Write a plugin
+# Schreiben einer Erweiterung
 
-A plugin is simply a function that takes `hook` as an argument. The hook supports handling of asynchronous tasks.
+Eine Erweiterung ist schlicht eine Funktion, welche `hook` als Argument nimmt. hook unterstützt dabei das Verwalten von asynchrononen Tasks.
 
-## Full configuration
+## Volle Konfiguration
 
 ```js
 window.$docsify = {
@@ -43,11 +43,11 @@ window.$docsify = {
 }
 ```
 
-!> You can get internal methods through `window.Docsify`. Get the current instance through the second argument.
+!> Du kannst auf interne Methoden über `window.Docsify` zugreifen. Greife auf die aktuelle Instanz über das zweite Argument zu.
 
-## Example
+## Beispiel
 
-Add footer component in each pages.
+Füge jeder Seite eine footer Komponente hinzu:
 
 ```js
 window.$docsify = {

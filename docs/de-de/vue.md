@@ -1,21 +1,21 @@
-# Compatible with Vue
+# Kompatibel mit Vue
 
-You can write Vue components directly in the Markdown file, and it will be parsed. You can use this feature to write vue demo and documentation together.
+Du kannst Vue Komponenten direkt in den Markdown Dateien verwenden, und sie werden umgewandelt. Du kannst dies zum Beispiel verwenden, um Vue Komponenten gleichzeitig zu demonstrieren und zu dokumentieren.
 
-## Basic usage
+## Einfache Verwendung
 
-Load the Vue in `./index.html`.
+Lade Vue in `./index.html`.
 
 ```html
 <script src="//unpkg.com/vue"></script>
 <script src="//unpkg.com/docsify"></script>
 
-<!-- or use the compressed files -->
+<!-- oder verwende die komprimierten Dateien -->
 <script src="//unpkg.com/vue/dist/vue.min.js"></script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 ```
 
-Then you can immediately write Vue code at Markdown file. `new Vue({ el: '#main' })` script is executed by default to create instance.
+Dann kannst du sofort Vue Code in deinen Markdown Dateien verwenden. `new Vue({ el: '#main' })` wird als Standard ausgeführt, um Instanzen zu erschaffen.
 
 *README.md*
 
@@ -35,7 +35,7 @@ Then you can immediately write Vue code at Markdown file. `new Vue({ el: '#main'
 </ul>
 ```
 
-You can manually initialize a Vue instance.
+Du kannst manuell eine Vue Instanz initialisieren.
 
 *README.md*
 
@@ -52,30 +52,31 @@ You can manually initialize a Vue instance.
 </script>
 ```
 
-!> In a Markdown file, only the script within the first script tag is executed.
+!> In Markdown Dateien wird nur das Skript innerhalb des ersten script tag Blocks ausgeführt.
 
-## Combine Vuep to write playground
+## Kombiniere Vuep um Demos zu erschaffen
 
-[Vuep](https://github.com/QingWei-Li/vuep) is a component for rendering Vue components with live editor and preview. Supports Vue component spec and JSX.
+[Vuep](https://github.com/QingWei-Li/vuep) ist eine Komponente zur Darstellung von Vue Komponenten mit einem Liveeditor und einer Vorschau.Unterstützt die Vue Komponenten spec und JSX.
 
 *index.html*
 
 ```html
-<!-- inject css file -->
+<!-- injizieren von CSS -->
 <link rel="stylesheet" href="//unpkg.com/vuep/dist/vuep.css">
 
-<!-- inject javascript file -->
+<!-- injizieren von JS -->
 <script src="//unpkg.com/vue"></script>
 <script src="//unpkg.com/vuep"></script>
 <script src="//unpkg.com/docsify"></script>
 
-<!-- or use the compressed files -->
+<!-- oder verwende die komprimierten Dateien -->
 <script src="//unpkg.com/vue/dist/vue.min.js"></script>
 <script src="//unpkg.com/vuep/dist/vuep.min.js"></script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 ```
 
 *README.md*
+
 ```markdown
 # Vuep
 
@@ -96,4 +97,4 @@ You can manually initialize a Vue instance.
 </script>
 ```
 
-?> Example Refer to the [vuep documentation](https://qingwei-li.github.io/vuep/).
+?> Zum Beispiel vergleich auch die [vuep Dokumentation](https://qingwei-li.github.io/vuep/).
