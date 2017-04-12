@@ -1,4 +1,24 @@
 
+# 3.6.0 / 2017-04-09
+
+  * feat(render): add mergeNavbar option, close ([#125](https://github.com/QingWei-Li/docsify/issues/125)
+
+# 3.5.2/ 2017-04-05
+
+  * add optional current route param to toURL and use it to properly compose local anchor links
+  * fix code style by removing semicolons
+  * in toURL test for anchor links and if so prepend the currentPath to the generated path. fixes ([#142](https://github.com/QingWei-Li/docsify/issues/142))
+
+# 3.5.1 / 2017-03-25
+
+  * fix: .md file extension regex
+
+# 3.5.0 / 2017-03-25
+
+  * feat(route): auto remove .md extension
+  * fix: adjust display on small screens [@jrappen](https://github.com/jrappen)
+  * fix: navbar labels for German [@jrappen](https://github.com/jrappen)
+
 # 3.4.4 / 2017-03-17
 
   * fix(search): fix input style

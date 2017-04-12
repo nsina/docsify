@@ -1,4 +1,0 @@
-- :de:
- - [:cn: 中文](/zh-cn/)
- - [:de: German](/de-de/)
- - [:uk: English](/)
