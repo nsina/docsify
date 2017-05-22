@@ -326,3 +326,27 @@ window.$docsify = {
 }
 ```
 
+## format-updated
+我们可以显示文档更新日期通过 **{docsify-updated<span>}</span>** 变量. 并且格式化日期通过 `formatUpdated`. 
+参考 https://github.com/lukeed/tinydate#patterns
+```js
+window.$docsify = {
+  formatUpdated: '{MM}/{DD} {HH}:{mm}',
+
+  formatUpdated: function (time) {
+    // ...
+
+    return time
+  }
+}
+```
+
+## external-link-target
+
+Currently it defaults to _blank, would be nice if configurable:
+
+```js
+window.$docsify = {
+  externalLinkTarget: '_self' // default: '_blank'
+}
+```

@@ -69,9 +69,9 @@ function style () {
   dom.appendTo(dom.head, style)
 }
 
-function tpl (opts) {
+function tpl (opts, defaultValue = '') {
   const html =
-    `<input type="search" />` +
+    `<input type="search" value="${defaultValue}" />` +
       '<div class="results-panel"></div>' +
     '</div>'
   const el = dom.create('div', html)
@@ -81,29 +81,32 @@ function tpl (opts) {
   dom.before(aside, el)
 }
 
+function doSearch (value) {
+  const $search = dom.find('div.search')
+  const $panel = dom.find($search, '.results-panel')
+
+  if (!value) {
+    $panel.classList.remove('show')
+    $panel.innerHTML = ''
+    return
+  }
+  const matchs = search(value)
+
+  let html = ''
+  matchs.forEach(post => {
+    html += `<div class="matching-post">
+<h2><a href="${post.url}">${post.title}</a></h2>
+<p>${post.content}</p>
+</div>`
+  })
+
+  $panel.classList.add('show')
+  $panel.innerHTML = html || `<p class="empty">${NO_DATA_TEXT}</p>`
+}
+
 function bindEvents () {
   const $search = dom.find('div.search')
   const $input = dom.find($search, 'input')
-  const $panel = dom.find($search, '.results-panel')
-  const doSearch = function (value) {
-    if (!value) {
-      $panel.classList.remove('show')
-      $panel.innerHTML = ''
-      return
-    }
-    const matchs = search(value)
-
-    let html = ''
-    matchs.forEach(post => {
-      html += `<div class="matching-post">
-  <h2><a href="${post.url}">${post.title}</a></h2>
-  <p>${post.content}</p>
-</div>`
-    })
-
-    $panel.classList.add('show')
-    $panel.innerHTML = html || `<p class="empty">${NO_DATA_TEXT}</p>`
-  }
 
   let timeId
   // Prevent to Fold sidebar
@@ -121,7 +124,7 @@ function updatePlaceholder (text, path) {
   if (typeof text === 'string') {
     $input.placeholder = text
   } else {
-    const match = Object.keys(text).find(key => path.indexOf(key) > -1)
+    const match = Object.keys(text).filter(key => path.indexOf(key) > -1)[0]
     $input.placeholder = text[match]
   }
 }
@@ -130,16 +133,19 @@ function updateNoData (text, path) {
   if (typeof text === 'string') {
     NO_DATA_TEXT = text
   } else {
-    const match = Object.keys(text).find(key => path.indexOf(key) > -1)
+    const match = Object.keys(text).filter(key => path.indexOf(key) > -1)[0]
     NO_DATA_TEXT = text[match]
   }
 }
 
 export function init (opts) {
   dom = Docsify.dom
+  const keywords = Docsify.route.parse().query.s
+
   style()
-  tpl(opts)
+  tpl(opts, keywords)
   bindEvents()
+  keywords && setTimeout(_ => doSearch(keywords), 500)
 }
 
 export function update (opts, vm) {

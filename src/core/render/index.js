@@ -8,6 +8,7 @@ import { callHook } from '../init/lifecycle'
 import { getBasePath, getPath, isAbsolutePath } from '../route/util'
 import { isPrimitive } from '../util/core'
 import { isMobile } from '../util/env'
+import tinydate from 'tinydate'
 
 function executeScript () {
   const script = dom.findAll('.markdown-section>script')
@@ -19,6 +20,16 @@ function executeScript () {
   setTimeout(_ => {
     window.__EXECUTE_RESULT__ = new Function(code)()
   }, 0)
+}
+
+function formatUpdated (html, updated, fn) {
+  updated = typeof fn === 'function'
+    ? fn(updated)
+    : typeof fn === 'string'
+      ? tinydate(fn)(new Date(updated))
+      : updated
+
+  return html.replace(/{docsify-updated}/g, updated)
 }
 
 function renderMain (html) {
@@ -59,7 +70,7 @@ function renderNameLink (vm) {
   if (isPrimitive(vm.config.nameLink)) {
     el.setAttribute('href', nameLink)
   } else if (typeof nameLink === 'object') {
-    const match = Object.keys(nameLink).find(key => path.indexOf(key) > -1)
+    const match = Object.keys(nameLink).filter(key => path.indexOf(key) > -1)[0]
 
     el.setAttribute('href', nameLink[match])
   }
@@ -97,9 +108,13 @@ export function renderMixin (proto) {
     getAndActive('nav')
   }
 
-  proto._renderMain = function (text) {
+  proto._renderMain = function (text, opt = {}) {
     callHook(this, 'beforeEach', text, result => {
-      const html = this.isHTML ? result : markdown(result)
+      let html = this.isHTML ? result : markdown(result)
+      if (opt.updatedAt) {
+        html = formatUpdated(html, opt.updatedAt, this.config.formatUpdated)
+      }
+
       callHook(this, 'afterEach', html, text => renderMain.call(this, text))
     })
   }
@@ -147,7 +162,7 @@ export function initRender (vm) {
   const config = vm.config
 
   // Init markdown compiler
-  markdown.init(config.markdown, config.basePath)
+  markdown.init(config.markdown, config)
 
   const id = config.el || '#app'
   const navEl = dom.find('nav') || dom.create('nav')

@@ -315,3 +315,28 @@ window.$docsify = {
   mergeNavbar: true
 }
 ```
+
+## format-updated
+We can display the file update date through **{docsify-updated<span>}</span>** variable. And format it by `formatUpdated`. 
+See https://github.com/lukeed/tinydate#patterns
+```js
+window.$docsify = {
+  formatUpdated: '{MM}/{DD} {HH}:{mm}',
+
+  formatUpdated: function (time) {
+    // ...
+
+    return time
+  }
+}
+```
+
+## external-link-target
+
+Currently it defaults to _blank, would be nice if configurable:
+
+```js
+window.$docsify = {
+  externalLinkTarget: '_self' // default: '_blank'
+}
+```
