@@ -1,14 +1,14 @@
 import * as dom from '../util/dom'
-import { getAndActive, sticky } from '../event/sidebar'
-import { scrollActiveSidebar, scroll2Top } from '../event/scroll'
-import cssVars from '../util/polyfill/css-vars'
 import * as tpl from './tpl'
-import { markdown, sidebar, subSidebar, cover } from './compiler'
-import { callHook } from '../init/lifecycle'
-import { getBasePath, getPath, isAbsolutePath } from '../route/util'
-import { isPrimitive } from '../util/core'
-import { isMobile } from '../util/env'
+import cssVars from '../util/polyfill/css-vars'
 import tinydate from 'tinydate'
+import { callHook } from '../init/lifecycle'
+import { Compiler } from './compiler'
+import { getAndActive, sticky } from '../event/sidebar'
+import { getPath, isAbsolutePath } from '../router/util'
+import { isMobile } from '../util/env'
+import { isPrimitive } from '../util/core'
+import { scrollActiveSidebar, scroll2Top } from '../event/scroll'
 
 function executeScript () {
   const script = dom.findAll('.markdown-section>script')
@@ -54,10 +54,6 @@ function renderMain (html) {
   } else {
     this.config.executeScript && executeScript()
   }
-
-  if (this.config.auto2top) {
-    scroll2Top(this.config.auto2top)
-  }
 }
 
 function renderNameLink (vm) {
@@ -83,34 +79,43 @@ export function renderMixin (proto) {
   }
 
   proto._renderSidebar = function (text) {
-    const { maxLevel, subMaxLevel, autoHeader, loadSidebar } = this.config
+    const { maxLevel, subMaxLevel, loadSidebar } = this.config
 
-    this._renderTo('.sidebar-nav', sidebar(text, maxLevel))
-    const active = getAndActive('.sidebar-nav', true, true)
-    subSidebar(loadSidebar ? active : '', subMaxLevel)
+    this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
+    const activeEl = getAndActive(this.router, '.sidebar-nav', true, true)
+    if (loadSidebar && activeEl) {
+      activeEl.parentNode.innerHTML += this.compiler.subSidebar(subMaxLevel)
+    }
     // bind event
-    this.activeLink = active
-    scrollActiveSidebar()
+    this._bindEventOnRendered()
+  }
 
-    if (autoHeader && active) {
+  proto._bindEventOnRendered = function (activeEl) {
+    const { autoHeader, auto2top } = this.config
+
+    scrollActiveSidebar(this.router)
+
+    if (autoHeader && activeEl) {
       const main = dom.getNode('#main')
       const firstNode = main.children[0]
       if (firstNode && firstNode.tagName !== 'H1') {
         const h1 = dom.create('h1')
-        h1.innerText = active.innerText
+        h1.innerText = activeEl.innerText
         dom.before(main, h1)
       }
     }
+
+    auto2top && scroll2Top(auto2top)
   }
 
   proto._renderNav = function (text) {
-    text && this._renderTo('nav', markdown(text))
-    getAndActive('nav')
+    text && this._renderTo('nav', this.compiler.compile(text))
+    getAndActive(this.router, 'nav')
   }
 
   proto._renderMain = function (text, opt = {}) {
     callHook(this, 'beforeEach', text, result => {
-      let html = this.isHTML ? result : markdown(result)
+      let html = this.isHTML ? result : this.compiler.compile(result)
       if (opt.updatedAt) {
         html = formatUpdated(html, opt.updatedAt, this.config.formatUpdated)
       }
@@ -127,7 +132,7 @@ export function renderMixin (proto) {
     }
     dom.toggleClass(el, 'add', 'show')
 
-    let html = this.coverIsHTML ? text : cover(text)
+    let html = this.coverIsHTML ? text : this.compiler.cover(text)
     const m = html.trim().match('<p><img.*?data-origin="(.*?)"[^a]+alt="(.*?)">([^<]*?)</p>$')
 
     if (m) {
@@ -138,7 +143,7 @@ export function renderMixin (proto) {
 
         dom.toggleClass(el, 'add', 'has-mask')
         if (!isAbsolutePath(m[1])) {
-          path = getPath(getBasePath(this.config.basePath), m[1])
+          path = getPath(this.router.getBasePath(), m[1])
         }
         el.style.backgroundImage = `url(${path})`
         el.style.backgroundSize = 'cover'
@@ -152,7 +157,6 @@ export function renderMixin (proto) {
   }
 
   proto._updateRender = function () {
-    markdown.update()
     // render name link
     renderNameLink(this)
   }
@@ -162,29 +166,29 @@ export function initRender (vm) {
   const config = vm.config
 
   // Init markdown compiler
-  markdown.init(config.markdown, config)
+  vm.compiler = new Compiler(config, vm.router)
 
   const id = config.el || '#app'
   const navEl = dom.find('nav') || dom.create('nav')
 
-  let el = dom.find(id)
+  const el = dom.find(id)
   let html = ''
   let navAppendToTarget = dom.body
 
-  if (!el) {
-    el = dom.create(id)
-    dom.appendTo(dom.body, el)
-  }
-  if (config.repo) {
-    html += tpl.corner(config.repo)
-  }
-  if (config.coverpage) {
-    html += tpl.cover()
-  }
+  if (el) {
+    if (config.repo) {
+      html += tpl.corner(config.repo)
+    }
+    if (config.coverpage) {
+      html += tpl.cover()
+    }
 
-  html += tpl.main(config)
-  // Render main app
-  vm._renderTo(el, html, true)
+    html += tpl.main(config)
+    // Render main app
+    vm._renderTo(el, html, true)
+  } else {
+    vm.rendered = true
+  }
 
   if (config.mergeNavbar && isMobile) {
     navAppendToTarget = dom.find('.sidebar')

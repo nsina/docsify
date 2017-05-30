@@ -14,18 +14,18 @@ function escapeHtml (string) {
   return String(string).replace(/[&<>"'\/]/g, s => entityMap[s])
 }
 
-function getAllPaths () {
+function getAllPaths (router) {
   const paths = []
 
   helper.dom.findAll('a:not([data-nosearch])')
     .map(node => {
       const href = node.href
       const originHref = node.getAttribute('href')
-      const path = helper.route.parse(href).path
+      const path = router.parse(href).path
 
       if (path &&
         paths.indexOf(path) === -1 &&
-        !helper.route.isAbsolutePath(originHref)) {
+        !Docsify.util.isAbsolutePath(originHref)) {
         paths.push(path)
       }
     })
@@ -38,16 +38,15 @@ function saveData (maxAge) {
   localStorage.setItem('docsify.search.index', JSON.stringify(INDEXS))
 }
 
-export function genIndex (path, content = '') {
+export function genIndex (path, content = '', router) {
   const tokens = window.marked.lexer(content)
   const slugify = window.Docsify.slugify
-  const toURL = Docsify.route.toURL
   const index = {}
   let slug
 
   tokens.forEach(token => {
     if (token.type === 'heading' && token.depth <= 2) {
-      slug = toURL(path, { id: slugify(token.text) })
+      slug = router.toURL(path, { id: slugify(token.text) })
       index[slug] = { slug, title: token.text, body: '' }
     } else {
       if (!slug) return
@@ -145,7 +144,7 @@ export function init (config, vm) {
     return
   }
 
-  const paths = isAuto ? getAllPaths() : config.paths
+  const paths = isAuto ? getAllPaths(vm.router) : config.paths
   const len = paths.length
   let count = 0
 
@@ -153,9 +152,9 @@ export function init (config, vm) {
     if (INDEXS[path]) return count++
 
     helper
-      .get(vm.$getFile(path))
+      .get(vm.router.getFile(path))
       .then(result => {
-        INDEXS[path] = genIndex(path, result)
+        INDEXS[path] = genIndex(path, result, vm.router)
         len === ++count && saveData(config.maxAge)
       })
   })

@@ -31,18 +31,12 @@ export function stringifyQuery (obj) {
   return qs.length ? `?${qs.join('&')}` : ''
 }
 
-export const getBasePath = cached(base => {
-  return /^(\/|https?:)/g.test(base)
-    ? base
-    : cleanPath(window.location.pathname + '/' + base)
-})
-
 export function getPath (...args) {
   return cleanPath(args.join('/'))
 }
 
 export const isAbsolutePath = cached(path => {
-  return /(:|(\/{2}))/.test(path)
+  return /(:|(\/{2}))/g.test(path)
 })
 
 export const getParentPath = cached(path => {

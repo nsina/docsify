@@ -1,7 +1,8 @@
 import { get } from './ajax'
 import { callHook } from '../init/lifecycle'
-import { getParentPath } from '../route/util'
+import { getParentPath } from '../router/util'
 import { noop } from '../util/core'
+import { getAndActive } from '../event/sidebar'
 
 function loadNested (path, file, next, vm, first) {
   path = first ? path : path.replace(/\/$/, '')
@@ -9,7 +10,7 @@ function loadNested (path, file, next, vm, first) {
 
   if (!path) return
 
-  get(vm.$getFile(path + file))
+  get(vm.router.getFile(path + file))
     .then(next, _ => loadNested(path, file, next, vm))
 }
 
@@ -22,7 +23,7 @@ export function fetchMixin (proto) {
     // Abort last request
     last && last.abort && last.abort()
 
-    last = get(this.$getFile(path), true)
+    last = get(this.router.getFile(path), true)
 
     // Current page is html
     this.isHTML = /\.html$/g.test(path)
@@ -47,7 +48,7 @@ export function fetchMixin (proto) {
   proto._fetchCover = function () {
     const { coverpage } = this.config
     const root = getParentPath(this.route.path)
-    const path = this.$getFile(root + coverpage)
+    const path = this.router.getFile(root + coverpage)
 
     if (this.route.path !== '/' || !coverpage) {
       this._renderCover()
@@ -70,5 +71,20 @@ export function fetchMixin (proto) {
 }
 
 export function initFetch (vm) {
-  vm.$fetch(_ => callHook(vm, 'ready'))
+  const { loadSidebar } = vm.config
+
+  // server-client renderer
+  if (vm.rendered) {
+    const activeEl = getAndActive(vm.router, '.sidebar-nav', true, true)
+    if (loadSidebar && activeEl) {
+      activeEl.parentNode.innerHTML += window.__SUB_SIDEBAR__
+    }
+    vm._bindEventOnRendered(activeEl)
+    vm._fetchCover()
+    vm.$resetEvents()
+    callHook(vm, 'doneEach')
+    callHook(vm, 'ready')
+  } else {
+    vm.$fetch(_ => callHook(vm, 'ready'))
+  }
 }
