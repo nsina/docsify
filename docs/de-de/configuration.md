@@ -250,11 +250,12 @@ window.$docsify = {
 
 - Typ: `Object`
 
-Verwende alternative Routen. Du kannst sie ungehindert anpassen.
+Verwende alternative Routen. Du kannst sie ungehindert anpassen. Supports RegExp.
 
 ```js
 window.$docsify = {
   alias: {
+    '/foo/(+*)': '/bar/$1', // supports regexp
     '/zh-cn/changelog': '/changelog',
     '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG'
   }
@@ -317,7 +318,7 @@ window.$docsify = {
 ```
 
 ## format-updated
-We can display the file update date through **{docsify-updated<span>}</span>** variable. And format it by `formatUpdated`. 
+We can display the file update date through **{docsify-updated<span>}</span>** variable. And format it by `formatUpdated`.
 See https://github.com/lukeed/tinydate#patterns
 ```js
 window.$docsify = {
@@ -338,5 +339,23 @@ Currently it defaults to _blank, would be nice if configurable:
 ```js
 window.$docsify = {
   externalLinkTarget: '_self' // default: '_blank'
+}
+```
+
+
+## noCompileLinks
+
+- type: `Array`
+
+
+Sometimes we do not want docsify to handle our links. See [#203](https://github.com/QingWei-Li/docsify/issues/203)
+
+
+```js
+window.$docsify = {
+  noCompileLinks: [
+    '/foo',
+    '/bar/.*'
+  ]
 }
 ```
