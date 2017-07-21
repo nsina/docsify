@@ -1,512 +1,736 @@
-### 2.4.3
 
-> 2017-02-15
+<a name="3.7.3"></a>
+## [3.7.3](https://github.com/QingWei-Li/docsify/compare/v3.7.2...v3.7.3) (2017-05-22)
 
-#### Bug fixes
 
-* fix emoji replacing error ([#76](https://github.com/QingWei-Li/docsify/issues/76))
+### Bug Fixes
 
-### 2.4.2
+* **render:** find => filter ([eca3368](https://github.com/QingWei-Li/docsify/commit/eca3368))
 
-> 2017-02-14
 
-#### Bug fixes
 
-* fix(index): load file path error
+<a name="3.7.2"></a>
+## [3.7.2](https://github.com/QingWei-Li/docsify/compare/v3.7.1...v3.7.2) (2017-05-19)
 
-### 2.4.1
 
-> 2017-02-13
 
-#### Bug fixes
+<a name="3.7.1"></a>
+## [3.7.1](https://github.com/QingWei-Li/docsify/compare/v3.7.0...v3.7.1) (2017-05-19)
 
-* fix(index): cover page
 
-### 2.4.0
+### Bug Fixes
 
-> 2017-02-13
+* docsify-updated is undefined ([b2b4742](https://github.com/QingWei-Li/docsify/commit/b2b4742))
 
-#### Features
 
-* feat(hook): add `doneEach`
 
-### 2.3.0
+<a name="3.7.0"></a>
+# [3.7.0](https://github.com/QingWei-Li/docsify/compare/v3.6.6...v3.7.0) (2017-05-16)
 
-> 2017-02-13
-
-#### Features
-
-* feat(src): add alias feature
-* docs: update all documents
-* feat(src): dynamic title
-* feat(hook): support custom plugin
-* feat(themes): add dark theme
-
-#### Bug fixes
-
-* fix(event): `auto2top` has no effect on a FF mobile browser, fixed #67
-* fix: sidebar style
-* fix(render): fix render link
-
-### 2.2.1
-
-> 2017-02-11
-
-#### Bug fixes
-
-* fix(search): crash when not content, fixed [#68](https://github.com/QingWei-Li/docsify/issues/68)
-* fix(event): scroll active sidebar
-* fix(search): not work in mobile
-
-### 2.2.0
-
-#### Features
-
-* Add `Google Analytics` plugin.
-  ```html
-  <script src="//unpkg.com/docsify" data-ga="UA-XXXXX-Y"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/ga.js"></script>
-  ```
-
-### 2.1.0
-
-#### Features
-
-* Add search plugin
-  ```html
-  <script src="//unpkg.com/docsify"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
-  ```
-
-#### Bug fixes
-
-* fix sidebar style
-
-### 2.0.3
-
-#### Bug fixes
-
-* fix: rendering emojis
-* fix: css var polyfill
-
-### 2.0.2
-
-#### Bug fixes
-
-* fix button style in cover page.
-
-### 2.0.1
-
-#### Bug fixes
-
-* border style.
-
-### 2.0.0
-
-#### Features
-
-* Customize the theme color
-
-#### Break change
-
-* Remove `data-router`, `data-sidebar`, `data-sidebar-toggle` APIs
-
-
-### 1.10.5
-
-#### Bug fixes
-
-* fix initialize the Vue instance
-
-### 1.10.4
-
-#### Bug fixes
-
-* fix execute script
-
-### 1.10.3
-
-#### Bug fixes
-
-* compatible vuep ([#2](https://github.com/QingWei-Li/vuep/issues/2))
-* fix sidebar scroll, fixed [#63](https://github.com/QingWei-Li/docsify/issues/63)
-
-### 1.10.2
-
-#### Bug fixes
-
-* Fix render emojis again
-
-### 1.10.1
-
-#### Bug fixes
-
-* Fix render emojis
-
-### 1.10.0
-
-#### Features
-
-* Support emoji :laughing:
-
-### 1.9.0
-
-#### Bug fixes
-
-* Destroys the vue instance when the route is changed
-
-#### Features
-
-* Add `!>` and `?>` doc helper.
-
-#### Break change
-
-* Remove `!` doc helper.
-
-### 1.8.0
-
-#### Bug fixes
-
-* Using `v-pre` skip compilation.
 
 ### Features
 
-* Execute script when vue exists.
+* add docsify-updated, close [#158](https://github.com/QingWei-Li/docsify/issues/158) ([d2be5ae](https://github.com/QingWei-Li/docsify/commit/d2be5ae))
+* add externalLinkTarget, close [#149](https://github.com/QingWei-Li/docsify/issues/149) ([2d73285](https://github.com/QingWei-Li/docsify/commit/2d73285))
 
-### 1.7.4
 
-#### Bug fixes
 
-* Fix bugs caused by the previous version
+<a name="3.6.6"></a>
+## [3.6.6](https://github.com/QingWei-Li/docsify/compare/v3.6.5...v3.6.6) (2017-05-06)
 
-### 1.7.3
-
-#### Bug fixes
-
-* Add `hr` style
-* Fixed option is an empty string
-
-### 1.7.2
-
-#### Bug fixes
-
-* Fix sidebar click event in mobile browser.
-
-### 1.7.1
-
-#### Bug fixes
-
-* Fix sidebar style in mobile browser.
-
-### 1.7.0
-
-#### Bug fixes
-
-* Fixed custom cover background, fixed [#52](https://github.com/QingWei-Li/docsify/issues/52)
-* Fixed sticky sidebar
 
 ### Features
 
-* Add `name` and `nameLink`
+* support query string for the search, fixed [#156](https://github.com/QingWei-Li/docsify/issues/156) ([da75d70](https://github.com/QingWei-Li/docsify/commit/da75d70))
 
-### 1.6.1
 
-#### Bug fixes
 
-* Fixed sidebar bug when the coverpage exist
+<a name="3.6.5"></a>
+## [3.6.5](https://github.com/QingWei-Li/docsify/compare/v3.6.4...v3.6.5) (2017-04-28)
 
-### 1.6.0
 
-#### Features
+### Bug Fixes
 
-* Improve sidebar performance. The active item is automatically scrolled in the visible view.
-* New doc helper: `! `. e.g. `! content` will be rendered as `<p class="tip">content</p>`
+* **util:** fix crash, fixed [#154](https://github.com/QingWei-Li/docsify/issues/154) ([51832d3](https://github.com/QingWei-Li/docsify/commit/51832d3))
 
-### 1.5.2
 
-#### Bug fixes
 
-* Fixed number at the beginning of the slug
+<a name="3.6.4"></a>
+## [3.6.4](https://github.com/QingWei-Li/docsify/compare/v3.6.3...v3.6.4) (2017-04-28)
 
-### 1.5.1
 
-#### Bug fixes
+### Bug Fixes
 
-* Remove HTML tag when handling slug
+* **util:** correctly clean up duplicate slashes, fixed [#153](https://github.com/QingWei-Li/docsify/issues/153) ([76c041a](https://github.com/QingWei-Li/docsify/commit/76c041a))
 
-### 1.5.0
 
-#### Bug fixes
 
-* Fix slugify.
-* Fix nav highlight.
+<a name="3.6.3"></a>
+## [3.6.3](https://github.com/QingWei-Li/docsify/compare/v3.6.2...v3.6.3) (2017-04-25)
 
-#### Features
 
-* Initialize the configuration by `window.$docsify`.
-* Markdown parser is configurable.
+### Bug Fixes
 
-### 1.4.3
+* **external-script:** script attrs ([2653849](https://github.com/QingWei-Li/docsify/commit/2653849))
 
-#### Bug fixes
 
-* Tweak style.
 
-### 1.4.2
+<a name="3.6.2"></a>
+## [3.6.2](https://github.com/QingWei-Li/docsify/compare/v3.6.0...v3.6.2) (2017-04-12)
 
-#### Bug fixes
 
-* Fix toggle button style.
-* Support `mailto`, `tel`, etc. href type
-* Fix scroll to top.
+### Features
 
-### 1.4.1
+* **event:** Collapse the sidebar when click outside element in the small screen ([9b7e5f5](https://github.com/QingWei-Li/docsify/commit/9b7e5f5))
+* **external-script:** detect more than one script dom, fixed [#146](https://github.com/QingWei-Li/docsify/issues/146) ([94d6603](https://github.com/QingWei-Li/docsify/commit/94d6603))
 
-#### Bug fixes
 
-* Fix generate slug.
 
-### 1.4.0 Happly new year 🎉
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/QingWei-Li/docsify/compare/v3.5.2...v3.6.0) (2017-04-09)
 
-#### Features
 
-* Display TOC in the custom sidebar, `data-sub-max-level`.
-* Custom background in coverpage.
+### Features
 
-#### Bug fixes
+* **render:** add mergeNavbar option, close [#125](https://github.com/QingWei-Li/docsify/issues/125), [#124](https://github.com/QingWei-Li/docsify/issues/124) ([#145](https://github.com/QingWei-Li/docsify/issues/145)) ([9220523](https://github.com/QingWei-Li/docsify/commit/9220523))
 
-* Fix scroll highlight when Vue exist.
 
-### 1.3.5
 
-#### Bug fixes
+<a name="3.5.2"></a>
+## [3.5.2](https://github.com/QingWei-Li/docsify/compare/v3.5.1...v3.5.2) (2017-04-05)
 
-* Fix vue
 
-### 1.3.4
 
-#### Bug fixes
+<a name="3.5.1"></a>
+## [3.5.1](https://github.com/QingWei-Li/docsify/compare/v3.5.0...v3.5.1) (2017-03-25)
 
-* Supports [vuep](https://github.com/QingWei-Li/vuep)
 
-### 1.3.3
+### Bug Fixes
 
-#### Bug fixes
+* .md file extension regex ([594299f](https://github.com/QingWei-Li/docsify/commit/594299f))
 
-* Fixed cover rendering timing
 
-### 1.3.2
 
-#### Bug fixes
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/QingWei-Li/docsify/compare/v3.4.4...v3.5.0) (2017-03-25)
 
-* Fixed render link
 
-### 1.3.1
+### Bug Fixes
 
-#### Bug fixes
+* adjust display on small screens ([bf35471](https://github.com/QingWei-Li/docsify/commit/bf35471))
+* navbar labels for German ([b022aaf](https://github.com/QingWei-Li/docsify/commit/b022aaf))
 
-* Fixed cover page style
-* Generate the correct link when rendering the article
 
-### 1.3.0
+### Features
 
-#### Features
+* **route:** auto remove .md extension ([8f11653](https://github.com/QingWei-Li/docsify/commit/8f11653))
 
-* Add cover page
-* add `<kbd>` style
-* headling can be cliked
 
-#### Bug fixes
 
-* sidebar highlight
+<a name="3.4.4"></a>
+## [3.4.4](https://github.com/QingWei-Li/docsify/compare/v3.4.3...v3.4.4) (2017-03-17)
 
-#### break change
 
-* Navbar no longer fixed at the top
+### Bug Fixes
 
-### 1.2.0
+* **search:** fix input style ([2d6a51b](https://github.com/QingWei-Li/docsify/commit/2d6a51b))
 
-#### Features
 
-* custom basePath
-* custom homepage
 
-### 1.1.7
+<a name="3.4.3"></a>
+## [3.4.3](https://github.com/QingWei-Li/docsify/compare/v3.4.2...v3.4.3) (2017-03-16)
 
-#### Bug fixes
 
-* Optimize progress bar
 
-### 1.1.6
+<a name="3.4.2"></a>
+## [3.4.2](https://github.com/QingWei-Li/docsify/compare/v3.4.1...v3.4.2) (2017-03-11)
 
-#### Features
 
-* Add logo 😂
+### Features
 
-#### Bug fixes
+* **emojify:** add no-emoji option ([3aef37a](https://github.com/QingWei-Li/docsify/commit/3aef37a))
 
-* Remove table background color
-* Fixed highlight sidebar using chinese ids
 
-### 1.1.5
 
-#### Features
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/QingWei-Li/docsify/compare/v3.4.0...v3.4.1) (2017-03-10)
 
-- Add table style
 
-#### Bug fixes
+### Bug Fixes
 
-* Not fixed position of hte navbar in the mobile browser
-* Correct calculation of whether the mobile browser
+* **dom:** Disable the dom cache when vue is present, fixed [#119](https://github.com/QingWei-Li/docsify/issues/119) ([b9a7275](https://github.com/QingWei-Li/docsify/commit/b9a7275))
 
-### 1.1.4
 
-#### Bug fixes
 
-* Fixed chinese auchor link
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/QingWei-Li/docsify/compare/v3.3.0...v3.4.0) (2017-03-09)
 
-### 1.1.3
 
-#### Bug fixes
+### Features
 
-* Optimize progress bar again
+* **zoom-image:** add plugin ([50fa6fc](https://github.com/QingWei-Li/docsify/commit/50fa6fc))
 
-### 1.1.2
 
-#### Bug fixes
 
-* fix failed `auto2top` in mobile
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/QingWei-Li/docsify/compare/v3.2.0...v3.3.0) (2017-03-07)
 
 
-### 1.1.1
 
-#### Bug fixes
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/QingWei-Li/docsify/compare/v3.1.2...v3.2.0) (2017-02-28)
 
-- Optimize progress bar
 
-### 1.1.0
+### Bug Fixes
 
-#### Features
+* **fetch:** load sidebar and navbar for parent path, fixed [#100](https://github.com/QingWei-Li/docsify/issues/100) ([f3fc596](https://github.com/QingWei-Li/docsify/commit/f3fc596))
+* **render:** Toc rendering error, fixed [#106](https://github.com/QingWei-Li/docsify/issues/106) ([0d59ee9](https://github.com/QingWei-Li/docsify/commit/0d59ee9))
 
-* Add progress bar
-* Add `auto2top` option for hash router
 
-### 1.0.3
+### Features
 
-#### Bug fixes
+* **search:** Localization for no data tip, close [#103](https://github.com/QingWei-Li/docsify/issues/103) ([d3c9fbd](https://github.com/QingWei-Li/docsify/commit/d3c9fbd))
 
-- Fix cache
 
-### 1.0.2
 
-#### Bug fixes
+<a name="3.1.2"></a>
+## [3.1.2](https://github.com/QingWei-Li/docsify/compare/v3.1.1...v3.1.2) (2017-02-27)
 
-* Fix binding events bug, fixed [#24](https://github.com/QingWei-Li/docsify/issues/24)
-* Fix regular expression, fixed [#23](https://github.com/QingWei-Li/docsify/issues/23)
 
-### 1.0.1
 
-#### Bug fixes
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/QingWei-Li/docsify/compare/v3.1.0...v3.1.1) (2017-02-24)
 
-* `img` style
 
-### 1.0.0
+### Bug Fixes
 
-#### Features
+* **render:** custom cover background image ([8f9bf29](https://github.com/QingWei-Li/docsify/commit/8f9bf29))
+* **search:** dont search nameLink, fixed [#102](https://github.com/QingWei-Li/docsify/issues/102) ([507d9e8](https://github.com/QingWei-Li/docsify/commit/507d9e8))
+* **tpl:** extra character, fixed [#101](https://github.com/QingWei-Li/docsify/issues/101) ([d67d25f](https://github.com/QingWei-Li/docsify/commit/d67d25f))
 
-* Support hash router
 
-#### Bug fixes
 
-* Improved scrolling on mobile
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/QingWei-Li/docsify/compare/v3.0.5...v3.1.0) (2017-02-22)
 
-### 0.7.0
 
-#### Breaking change
+### Bug Fixes
 
-* `themes/` was removed, only exists in the npm package.
+* **search:** incorrect anchor link, fixed [#90](https://github.com/QingWei-Li/docsify/issues/90) ([b8a3d8f](https://github.com/QingWei-Li/docsify/commit/b8a3d8f))
+* **sw:** update white list ([f2975a5](https://github.com/QingWei-Li/docsify/commit/f2975a5))
 
-#### Bug fixes
 
-* Fix style.
-* Fix sidebar animation again.
+### Features
 
-### 0.6.1
+* **emoji:** add emoji plugin ([855c450](https://github.com/QingWei-Li/docsify/commit/855c450))
 
-#### Bug fixes
 
-* In the mobile, it should collapse the sidebar when toggle is clicked.
-* Fix the dropdown list style.
-* Fix sidebar animation.
 
-### 0.6.0
+<a name="3.0.5"></a>
+## [3.0.5](https://github.com/QingWei-Li/docsify/compare/v3.0.4...v3.0.5) (2017-02-21)
 
-#### Features
 
-* Navbar support dropdown list, [#6](https://github.com/QingWei-Li/docsify/issues/6)
-* Sidebar with toggle
+### Bug Fixes
 
-#### Bug fixes
+* **event:** highlight sidebar when clicked, fixed [#86](https://github.com/QingWei-Li/docsify/issues/86) ([2a1157a](https://github.com/QingWei-Li/docsify/commit/2a1157a))
+* **gen-tree:** cache toc list, fixed [#88](https://github.com/QingWei-Li/docsify/issues/88) ([3394ebb](https://github.com/QingWei-Li/docsify/commit/3394ebb))
+* **layout.css:** loading style ([42b2dba](https://github.com/QingWei-Li/docsify/commit/42b2dba))
 
-* Fix ineffective option, fixed [#10](https://github.com/QingWei-Li/docsify/issues/10)
 
-### 0.5.0
+### Features
 
-#### Features
+* **pwa:** add sw.js ([f7111b5](https://github.com/QingWei-Li/docsify/commit/f7111b5))
 
-* Custom sidebars and navbars by markdown file
 
-### 0.4.2
 
-#### Bug fixes
+<a name="3.0.4"></a>
+## [3.0.4](https://github.com/QingWei-Li/docsify/compare/v3.0.3...v3.0.4) (2017-02-20)
 
-* Correct catch ajax error
 
-### 0.4.1
+### Bug Fixes
 
-#### Bug fixes
+* **render:** disable rendering sub list when loadSidebar is false ([35dd2e1](https://github.com/QingWei-Li/docsify/commit/35dd2e1))
+* **render:** execute script ([780c1e5](https://github.com/QingWei-Li/docsify/commit/780c1e5))
 
-* catch ajax error
 
-### 0.4.0
 
-#### Features
+<a name="3.0.3"></a>
+## [3.0.3](https://github.com/QingWei-Li/docsify/compare/v3.0.2...v3.0.3) (2017-02-19)
 
-* Custom sidebar
 
-#### Bug fixes
 
-* Fix undefined language
+<a name="3.0.2"></a>
+## [3.0.2](https://github.com/QingWei-Li/docsify/compare/v3.0.1...v3.0.2) (2017-02-19)
 
-### 0.3.1
 
-#### Bug fixes
+### Bug Fixes
 
-* Strip HTML tag when rendering the headings
+* **compiler:** link ([3b127a1](https://github.com/QingWei-Li/docsify/commit/3b127a1))
+* **search:** add lazy input ([bf593a7](https://github.com/QingWei-Li/docsify/commit/bf593a7))
 
-### 0.3.0
 
-#### Features
 
-* Add minified css files
-* Add max level option
-* Add pure.css
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/QingWei-Li/docsify/compare/v3.0.0...v3.0.1) (2017-02-19)
 
-### 0.2.1
 
-#### Bug fixes
+### Bug Fixes
 
-* Fix vue.css
+* **route:** empty alias ([cd99b52](https://github.com/QingWei-Li/docsify/commit/cd99b52))
 
-### 0.2.0
 
-#### Bug fixes
 
-* Fix route
-* Remove dynamic title
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/QingWei-Li/docsify/compare/v2.4.3...v3.0.0) (2017-02-19)
 
-### 0.1.0
 
-#### Features
+### Bug Fixes
 
-* Add buble.css
+* **compiler:** link ([c7e09c3](https://github.com/QingWei-Li/docsify/commit/c7e09c3))
+* **render:** support html file ([7b6a2ac](https://github.com/QingWei-Li/docsify/commit/7b6a2ac))
+* **search:** escape html ([fcb66e8](https://github.com/QingWei-Li/docsify/commit/fcb66e8))
+* **search:** fix default config ([2efd859](https://github.com/QingWei-Li/docsify/commit/2efd859))
+
+
+### Features
+
+* **front-matter:** add front matter[WIP] ([dbb9278](https://github.com/QingWei-Li/docsify/commit/dbb9278))
+* **render:** add auto header ([b7768b1](https://github.com/QingWei-Li/docsify/commit/b7768b1))
+* **search:** Localization for search placeholder, close [#80](https://github.com/QingWei-Li/docsify/issues/80) ([2351c3e](https://github.com/QingWei-Li/docsify/commit/2351c3e))
+* **themes:** add loading info ([86594a3](https://github.com/QingWei-Li/docsify/commit/86594a3))
+
+
+
+<a name="2.4.3"></a>
+## [2.4.3](https://github.com/QingWei-Li/docsify/compare/v2.4.2...v2.4.3) (2017-02-15)
+
+
+
+<a name="2.4.2"></a>
+## [2.4.2](https://github.com/QingWei-Li/docsify/compare/v2.4.1...v2.4.2) (2017-02-14)
+
+
+### Bug Fixes
+
+* **index:** load file path error ([dc536a3](https://github.com/QingWei-Li/docsify/commit/dc536a3))
+
+
+
+<a name="2.4.1"></a>
+## [2.4.1](https://github.com/QingWei-Li/docsify/compare/v2.4.0...v2.4.1) (2017-02-13)
+
+
+### Bug Fixes
+
+* **index:** cover page ([dd0c84b](https://github.com/QingWei-Li/docsify/commit/dd0c84b))
+
+
+
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/QingWei-Li/docsify/compare/v2.3.0...v2.4.0) (2017-02-13)
+
+
+### Features
+
+* **hook:** add doneEach ([c6f7602](https://github.com/QingWei-Li/docsify/commit/c6f7602))
+
+
+
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/QingWei-Li/docsify/compare/v2.2.1...v2.3.0) (2017-02-13)
+
+
+### Bug Fixes
+
+* **event:**  has no effect on a FF mobile browser, fixed [#67](https://github.com/QingWei-Li/docsify/issues/67) ([0ff36c2](https://github.com/QingWei-Li/docsify/commit/0ff36c2))
+* **render:** custom marked renderer ([bf559b4](https://github.com/QingWei-Li/docsify/commit/bf559b4))
+* **render:** fix render link ([a866744](https://github.com/QingWei-Li/docsify/commit/a866744))
+* **render:** image url ([6f87529](https://github.com/QingWei-Li/docsify/commit/6f87529))
+* **render:** render link ([38ea660](https://github.com/QingWei-Li/docsify/commit/38ea660))
+* **src:** fix route ([324301a](https://github.com/QingWei-Li/docsify/commit/324301a))
+* **src:** get alias ([784173e](https://github.com/QingWei-Li/docsify/commit/784173e))
+* **src:** get alias ([ce99a04](https://github.com/QingWei-Li/docsify/commit/ce99a04))
+* **themes:** fix navbar style ([fa54b52](https://github.com/QingWei-Li/docsify/commit/fa54b52))
+* **themes:** update navbar style ([4864d1b](https://github.com/QingWei-Li/docsify/commit/4864d1b))
+
+
+### Features
+
+* **hook:** support custom plugin ([9e81a59](https://github.com/QingWei-Li/docsify/commit/9e81a59))
+* **src:** add alias feature ([24412cd](https://github.com/QingWei-Li/docsify/commit/24412cd))
+* **src:** dynamic title and fix sidebar style ([6b30eb6](https://github.com/QingWei-Li/docsify/commit/6b30eb6))
+
+
+
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/QingWei-Li/docsify/compare/v2.2.0...v2.2.1) (2017-02-11)
+
+
+### Bug Fixes
+
+* **event:** scroll active sidebar ([50f5fc2](https://github.com/QingWei-Li/docsify/commit/50f5fc2))
+* **search:** crash when not content, fixed [#68](https://github.com/QingWei-Li/docsify/issues/68) ([9d3cc89](https://github.com/QingWei-Li/docsify/commit/9d3cc89))
+* **search:** not work in mobile ([3941304](https://github.com/QingWei-Li/docsify/commit/3941304))
+
+
+
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/QingWei-Li/docsify/compare/v2.1.0...v2.2.0) (2017-02-09)
+
+
+### Features
+
+* **plugins:** add Google Analytics plugin ([#66](https://github.com/QingWei-Li/docsify/issues/66)) ([ac61bb0](https://github.com/QingWei-Li/docsify/commit/ac61bb0))
+
+
+
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/QingWei-Li/docsify/compare/v2.0.3...v2.1.0) (2017-02-09)
+
+
+### Bug Fixes
+
+* render name ([12e2479](https://github.com/QingWei-Li/docsify/commit/12e2479))
+* **vue.css:** update sidebar style ([fc140ef](https://github.com/QingWei-Li/docsify/commit/fc140ef))
+
+
+### Features
+
+* add search, close [#43](https://github.com/QingWei-Li/docsify/issues/43) ([eb5ff3e](https://github.com/QingWei-Li/docsify/commit/eb5ff3e))
+
+
+
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/QingWei-Li/docsify/compare/v2.0.2...v2.0.3) (2017-02-07)
+
+
+### Bug Fixes
+
+* css var polyfill ([8cd386a](https://github.com/QingWei-Li/docsify/commit/8cd386a))
+* css var polyfill ([cbaee21](https://github.com/QingWei-Li/docsify/commit/cbaee21))
+* rendering emojis ([8c7e4d7](https://github.com/QingWei-Li/docsify/commit/8c7e4d7))
+
+
+
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/QingWei-Li/docsify/compare/v2.0.1...v2.0.2) (2017-02-05)
+
+
+### Bug Fixes
+
+* button style in cover page ([4470855](https://github.com/QingWei-Li/docsify/commit/4470855))
+
+
+
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/QingWei-Li/docsify/compare/v2.0.0...v2.0.1) (2017-02-05)
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/QingWei-Li/docsify/compare/v1.10.5...v2.0.0) (2017-02-05)
+
+
+### Features
+
+* customize the theme color ([5cc9f05](https://github.com/QingWei-Li/docsify/commit/5cc9f05))
+
+
+
+<a name="1.10.5"></a>
+## [1.10.5](https://github.com/QingWei-Li/docsify/compare/v1.10.4...v1.10.5) (2017-01-28)
+
+
+
+<a name="1.10.4"></a>
+## [1.10.4](https://github.com/QingWei-Li/docsify/compare/v1.10.3...v1.10.4) (2017-01-27)
+
+
+
+<a name="1.10.3"></a>
+## [1.10.3](https://github.com/QingWei-Li/docsify/compare/v1.10.2...v1.10.3) (2017-01-27)
+
+
+
+<a name="1.10.2"></a>
+## [1.10.2](https://github.com/QingWei-Li/docsify/compare/v1.10.1...v1.10.2) (2017-01-25)
+
+
+
+<a name="1.10.1"></a>
+## [1.10.1](https://github.com/QingWei-Li/docsify/compare/v1.10.0...v1.10.1) (2017-01-25)
+
+
+
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/QingWei-Li/docsify/compare/v1.9.0...v1.10.0) (2017-01-25)
+
+
+
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/QingWei-Li/docsify/compare/v1.8.0...v1.9.0) (2017-01-24)
+
+
+
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/QingWei-Li/docsify/compare/v1.7.4...v1.8.0) (2017-01-24)
+
+
+
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/QingWei-Li/docsify/compare/v1.7.3...v1.7.4) (2017-01-13)
+
+
+
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/QingWei-Li/docsify/compare/v1.7.2...v1.7.3) (2017-01-13)
+
+
+
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/QingWei-Li/docsify/compare/v1.7.1...v1.7.2) (2017-01-12)
+
+
+
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/QingWei-Li/docsify/compare/v1.7.0...v1.7.1) (2017-01-12)
+
+
+
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/QingWei-Li/docsify/compare/v1.6.1...v1.7.0) (2017-01-12)
+
+
+
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/QingWei-Li/docsify/compare/v1.6.0...v1.6.1) (2017-01-10)
+
+
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/QingWei-Li/docsify/compare/v1.5.2...v1.6.0) (2017-01-10)
+
+
+
+<a name="1.5.2"></a>
+## [1.5.2](https://github.com/QingWei-Li/docsify/compare/v1.5.1...v1.5.2) (2017-01-10)
+
+
+
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/QingWei-Li/docsify/compare/v1.5.0...v1.5.1) (2017-01-09)
+
+
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/QingWei-Li/docsify/compare/v1.4.3...v1.5.0) (2017-01-04)
+
+
+### Features
+
+* Markdown parser is configurable, [#42](https://github.com/QingWei-Li/docsify/issues/42) ([8b1000a](https://github.com/QingWei-Li/docsify/commit/8b1000a))
+
+
+
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/QingWei-Li/docsify/compare/v1.4.2...v1.4.3) (2017-01-01)
+
+
+
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/QingWei-Li/docsify/compare/v1.4.1...v1.4.2) (2016-12-31)
+
+
+
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/QingWei-Li/docsify/compare/v1.4.0...v1.4.1) (2016-12-31)
+
+
+
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/QingWei-Li/docsify/compare/v1.3.5...v1.4.0) (2016-12-31)
+
+
+
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/QingWei-Li/docsify/compare/v1.3.4...v1.3.5) (2016-12-25)
+
+
+
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/QingWei-Li/docsify/compare/v1.3.3...v1.3.4) (2016-12-25)
+
+
+
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/QingWei-Li/docsify/compare/v1.3.2...v1.3.3) (2016-12-23)
+
+
+
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/QingWei-Li/docsify/compare/v1.3.1...v1.3.2) (2016-12-22)
+
+
+
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/QingWei-Li/docsify/compare/v1.3.0...v1.3.1) (2016-12-22)
+
+
+
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/QingWei-Li/docsify/compare/v1.2.0...v1.3.0) (2016-12-21)
+
+
+
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/QingWei-Li/docsify/compare/v1.1.7...v1.2.0) (2016-12-20)
+
+
+
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/QingWei-Li/docsify/compare/v1.1.6...v1.1.7) (2016-12-19)
+
+
+
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/QingWei-Li/docsify/compare/v1.1.5...v1.1.6) (2016-12-18)
+
+
+
+<a name="1.1.5"></a>
+## [1.1.5](https://github.com/QingWei-Li/docsify/compare/v1.1.4...v1.1.5) (2016-12-18)
+
+
+
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/QingWei-Li/docsify/compare/v1.1.3...v1.1.4) (2016-12-17)
+
+
+
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/QingWei-Li/docsify/compare/v1.1.2...v1.1.3) (2016-12-17)
+
+
+
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/QingWei-Li/docsify/compare/v1.1.1...v1.1.2) (2016-12-17)
+
+
+
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/QingWei-Li/docsify/compare/v1.1.0...v1.1.1) (2016-12-17)
+
+
+
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/QingWei-Li/docsify/compare/v1.0.3...v1.1.0) (2016-12-16)
+
+
+
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/QingWei-Li/docsify/compare/v1.0.2...v1.0.3) (2016-12-13)
+
+
+
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/QingWei-Li/docsify/compare/v1.0.1...v1.0.2) (2016-12-13)
+
+
+
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/QingWei-Li/docsify/compare/v1.0.0...v1.0.1) (2016-12-08)
+
+
+
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/QingWei-Li/docsify/compare/v0.7.0...v1.0.0) (2016-12-08)
+
+
+
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/QingWei-Li/docsify/compare/v0.6.1...v0.7.0) (2016-11-30)
+
+
+
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/QingWei-Li/docsify/compare/v0.6.0...v0.6.1) (2016-11-29)
+
+
+
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/QingWei-Li/docsify/compare/v0.5.0...v0.6.0) (2016-11-29)
+
+
+
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/QingWei-Li/docsify/compare/v0.4.2...v0.5.0) (2016-11-28)
+
+
+
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/QingWei-Li/docsify/compare/v0.4.1...v0.4.2) (2016-11-28)
+
+
+
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/QingWei-Li/docsify/compare/v0.4.0...v0.4.1) (2016-11-28)
+
+
+
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/QingWei-Li/docsify/compare/v0.3.1...v0.4.0) (2016-11-27)
+
+
+### Features
+
+* custom sidebar, [#4](https://github.com/QingWei-Li/docsify/issues/4) ([#5](https://github.com/QingWei-Li/docsify/issues/5)) ([37e7984](https://github.com/QingWei-Li/docsify/commit/37e7984))
+
+
+
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/QingWei-Li/docsify/compare/v0.3.0...v0.3.1) (2016-11-27)
+
+
+
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/QingWei-Li/docsify/compare/v0.2.1...v0.3.0) (2016-11-27)
+
+
+
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/QingWei-Li/docsify/compare/v0.2.0...v0.2.1) (2016-11-26)
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/QingWei-Li/docsify/compare/v0.1.0...v0.2.0) (2016-11-26)
+
+
+
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/QingWei-Li/docsify/compare/v0.0.5...v0.1.0) (2016-11-26)
+
+
+
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/QingWei-Li/docsify/compare/v0.0.4...v0.0.5) (2016-11-24)
+
+
+
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/QingWei-Li/docsify/compare/v0.0.3...v0.0.4) (2016-11-22)
+
+
+
+<a name="0.0.3"></a>
+## [0.0.3](https://github.com/QingWei-Li/docsify/compare/v0.0.2...v0.0.3) (2016-11-20)
+
+
+
+<a name="0.0.2"></a>
+## [0.0.2](https://github.com/QingWei-Li/docsify/compare/v0.0.1...v0.0.2) (2016-11-20)
+
+
+
+<a name="0.0.1"></a>
+## 0.0.1 (2016-11-20)
