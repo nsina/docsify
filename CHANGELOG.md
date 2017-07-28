@@ -1,3 +1,32 @@
+<a name="4.2.6"></a>
+## [4.2.6](https://github.com/QingWei-Li/docsify/compare/v4.2.4...v4.2.6) (2017-07-27)
+
+
+### Bug Fixes
+
+* **css:** hide the nav when the content has not yet been loaded ([1fa1619](https://github.com/QingWei-Li/docsify/commit/1fa1619))
+* **release:** release shell ([628e211](https://github.com/QingWei-Li/docsify/commit/628e211))
+
+
+
+<a name="4.2.4"></a>
+## [4.2.4](https://github.com/QingWei-Li/docsify/compare/v4.2.2...v4.2.4) (2017-07-26)
+
+
+### Bug Fixes
+
+* **render:** Remove getRootNode to be compatible with the lower version of Chrome, fixed [#225](https://github.com/QingWei-Li/docsify/issues/225) ([b8dd346](https://github.com/QingWei-Li/docsify/commit/b8dd346))
+
+<a name="4.2.3"></a>
+## [4.2.3](https://github.com/QingWei-Li/docsify/compare/v4.2.2...v4.2.3) (2017-07-26)
+
+
+### Features
+
+* **search:** Supports the max depth of the search headline, fixed [#223](https://github.com/QingWei-Li/docsify/issues/223), resolve [#129](https://github.com/QingWei-Li/docsify/issues/129) ([b7b589b](https://github.com/QingWei-Li/docsify/commit/b7b589b))
+
+
+
 <a name="4.2.2"></a>
 ## [4.2.2](https://github.com/QingWei-Li/docsify/compare/v4.2.1...v4.2.2) (2017-07-24)
 

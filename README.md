@@ -20,6 +20,7 @@
 
 - [Documentation](https://docsify.js.org)
 - [CLI](https://github.com/QingWei-Li/docsify-cli)
+- CDN: [UNPKG](https://unpkg.com/docsify/) | [jsDelivr](https://cdn.jsdelivr.net/npm/docsify/)
 
 ## Features
 
@@ -74,6 +75,7 @@ These projects are using docsify to generate their sites. Pull requests welcome 
 | [palettify](https://dobromir-hristov.github.io/palettify/) | A color palette effects assistant |
 | [commitlint](https://marionebl.github.io/commitlint/) | Lint commit messages |
 | [vue-data-tables](https://github.com/njleonzhang/vue-data-tables/) | A simple and customizable data table，based on vue2 and element-ui. |
+| [Noty](http://ned.im/noty/) | A Dependency-free notification library |
 
 ## Similar projects
 
