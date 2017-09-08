@@ -1,15 +1,34 @@
 import { isMobile } from '../util/env'
 import * as dom from '../util/dom'
+import Tweezer from 'tweezer.js'
 
 const nav = {}
 let hoverOver = false
+let scroller = null
+let enableScrollEvent = true
+let coverHeight = 0
+
+function scrollTo (el) {
+  if (scroller) scroller.stop()
+  enableScrollEvent = false
+  scroller = new Tweezer({
+    start: window.scrollY,
+    end: el.getBoundingClientRect().top + window.scrollY,
+    duration: 500
+  })
+  .on('tick', v => window.scrollTo(0, v))
+  .on('done', () => { enableScrollEvent = true; scroller = null })
+  .begin()
+}
 
 function highlight () {
+  if (!enableScrollEvent) return
   const sidebar = dom.getNode('.sidebar')
   const anchors = dom.findAll('.anchor')
   const wrap = dom.find(sidebar, '.sidebar-nav')
   let active = dom.find(sidebar, 'li.active')
-  const top = dom.body.scrollTop
+  const doc = document.documentElement
+  const top = (doc && doc.scrollTop || document.body.scrollTop) - coverHeight
   let last
 
   for (let i = 0, len = anchors.length; i < len; i += 1) {
@@ -53,7 +72,8 @@ function highlight () {
 }
 
 export function scrollActiveSidebar (router) {
-  if (isMobile) return
+  const cover = dom.find('.cover.show')
+  coverHeight = cover ? cover.offsetHeight : 0
 
   const sidebar = dom.getNode('.sidebar')
   const lis = dom.findAll(sidebar, 'li')
@@ -68,8 +88,10 @@ export function scrollActiveSidebar (router) {
       href = router.parse(href).query.id
     }
 
-    nav[decodeURIComponent(href)] = li
+    if (href) nav[decodeURIComponent(href)] = li
   }
+
+  if (isMobile) return
 
   dom.off('scroll', highlight)
   dom.on('scroll', highlight)
@@ -78,8 +100,16 @@ export function scrollActiveSidebar (router) {
 }
 
 export function scrollIntoView (id) {
+  if (!id) return
+
   const section = dom.find('#' + id)
-  section && section.scrollIntoView()
+  section && scrollTo(section)
+
+  const li = nav[id]
+  const sidebar = dom.getNode('.sidebar')
+  const active = dom.find(sidebar, 'li.active')
+  active && active.classList.remove('active')
+  li && li.classList.add('active')
 }
 
 const scrollEl = dom.$.scrollingElement || dom.$.documentElement

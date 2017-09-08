@@ -96,3 +96,15 @@ Medium's Image Zoom. Based on [zoom-image](https://github.com/egoist/zoom-image)
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
 ```
+
+## Edit on github
+
+Add `Edit on github` button on every pages. provided by 3rd party, check [document](https://github.com/njleonzhang/docsify-edit-on-github)
+
+## Demo code with instant preview and jsfiddle integration
+
+With this plugin, sample code can be rendered on the page instantly, so that the readers can see the preview immediately.
+When readers expand the demo box, the source code and description are shown there. if they click the button `Try in Jsfiddle`,
+`jsfiddle.net` will be open with the code of this sample, which allow readers to revise the code and try on their own.
+
+[Vue](https://njleonzhang.github.io/docsify-demo-box-vue/) and [React](https://njleonzhang.github.io/docsify-demo-box-react/) are both supported.

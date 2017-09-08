@@ -1,3 +1,53 @@
+<a name="4.3.4"></a>
+## [4.3.4](https://github.com/QingWei-Li/docsify/compare/v4.3.3...v4.3.4) (2017-09-07)
+
+
+### Bug Fixes
+
+* scroll position issue, fixed [#234](https://github.com/QingWei-Li/docsify/issues/234) ([388ed3d](https://github.com/QingWei-Li/docsify/commit/388ed3d))
+
+
+
+<a name="4.3.3"></a>
+## [4.3.3](https://github.com/QingWei-Li/docsify/compare/v4.3.2...v4.3.3) (2017-09-06)
+
+
+### Bug Fixes
+
+* **buble.css:** tweaks code block style, fixed [#249](https://github.com/QingWei-Li/docsify/issues/249) ([9d43051](https://github.com/QingWei-Li/docsify/commit/9d43051))
+
+
+### Features
+
+* add doc for react and vue demo box plugin ([#247](https://github.com/QingWei-Li/docsify/issues/247)) ([f0aca19](https://github.com/QingWei-Li/docsify/commit/f0aca19))
+
+
+
+<a name="4.3.2"></a>
+## [4.3.2](https://github.com/QingWei-Li/docsify/compare/v4.3.1...v4.3.2) (2017-09-01)
+
+
+### Bug Fixes
+
+* sidebar highlight ([f82f419](https://github.com/QingWei-Li/docsify/commit/f82f419))
+
+
+### Features
+
+* add Edit on github plugin (thanks [@njleonzhang](https://github.com/njleonzhang)) ([a0e1ea8](https://github.com/QingWei-Li/docsify/commit/a0e1ea8))
+
+
+
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/QingWei-Li/docsify/compare/v4.2.9...v4.3.1) (2017-08-30)
+
+
+### Features
+
+* **markdown:** supports mermaid [#137](https://github.com/QingWei-Li/docsify/issues/137) ([f4800e0](https://github.com/QingWei-Li/docsify/commit/f4800e0))
+
+
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/QingWei-Li/docsify/compare/v4.2.9...v4.3.0) (2017-08-17)
 
