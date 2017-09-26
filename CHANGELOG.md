@@ -1,3 +1,28 @@
+<a name="4.3.6"></a>
+## [4.3.6](https://github.com/QingWei-Li/docsify/compare/v4.3.5...v4.3.6) (2017-09-21)
+
+
+### Bug Fixes
+
+* style for codesponsor plugin ([08afec7](https://github.com/QingWei-Li/docsify/commit/08afec7))
+
+
+
+<a name="4.3.5"></a>
+## [4.3.5](https://github.com/QingWei-Li/docsify/compare/v4.3.4...v4.3.5) (2017-09-20)
+
+
+### Bug Fixes
+
+* missed symbol ([#254](https://github.com/QingWei-Li/docsify/issues/254)) ([6c702d3](https://github.com/QingWei-Li/docsify/commit/6c702d3))
+
+
+### Features
+
+* **plugin:** add codesponsor plugin ([46ac4c3](https://github.com/QingWei-Li/docsify/commit/46ac4c3))
+
+
+
 <a name="4.3.4"></a>
 ## [4.3.4](https://github.com/QingWei-Li/docsify/compare/v4.3.3...v4.3.4) (2017-09-07)
 
