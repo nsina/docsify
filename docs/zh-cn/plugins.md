@@ -85,21 +85,29 @@
 
 ## 图片缩放 - Zoom image
 
-Medium's 风格的图片缩放插件. 基于 [zoom-image](https://github.com/egoist/zoom-image)。
+Medium's 风格的图片缩放插件. 基于 [medium-zoom](https://github.com/francoischalifour/medium-zoom)。
 
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
 ```
 
 
-## Edit on github
+忽略某张图片
 
-Add `Edit on github` button on every pages. provided by 3rd party, check [document](https://github.com/njleonzhang/docsify-edit-on-github)
+```markdown
+![](image.png ':no-zoom')
+```
+
+
+
+## 在 Github 上编辑
+
+在每一页上添加 `Edit on github` 按钮. 由第三方库提供, 查看 [document](https://github.com/njleonzhang/docsify-edit-on-github)
 
 
 ## CodeSponsor
 
-See https://codesponsor.io
+参考 https://codesponsor.io
 
 
 ```html

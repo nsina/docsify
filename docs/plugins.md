@@ -91,11 +91,18 @@ If the script on the page is an external one (imports a js file via `src` attrib
 
 ## Zoom image
 
-Medium's Image Zoom. Based on [zoom-image](https://github.com/egoist/zoom-image).
+Medium's image zoom. Based on [medium-zoom](https://github.com/francoischalifour/medium-zoom).
 
 ```html
 <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
 ```
+
+Exclude the special image
+
+```markdown
+![](image.png ':no-zoom')
+```
+
 
 ## Edit on github
 
@@ -140,3 +147,39 @@ window.$docsify = {
 ```
 
 See [here](https://github.com/jperasmus/docsify-copy-code/blob/master/README.md) for more details.
+
+
+## Disqus
+
+Disqus comments. https://disqus.com/
+
+```html
+<script>
+  window.$docsify = {
+    disqus: 'shortname'
+  }
+</script>
+<script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
+```
+
+## Gitalk
+
+Gitalk is a modern comment component based on Github Issue and Preact. https://github.com/gitalk/gitalk
+
+```html
+<link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: 'Github Application Client ID',
+    clientSecret: 'Github Application Client Secret',
+    repo: 'Github repo',
+    owner: 'Github repo owner',
+    admin: ['Github repo collaborators, only these guys can initialize github issues'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false
+  })
+</script>
+```

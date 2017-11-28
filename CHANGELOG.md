@@ -1,3 +1,69 @@
+<a name="4.5.3"></a>
+## [4.5.3](https://github.com/QingWei-Li/docsify/compare/v4.5.2...v4.5.3) (2017-11-11)
+
+
+### Features
+
+* add gitalk plugin ([#306](https://github.com/QingWei-Li/docsify/issues/306)) ([9208e64](https://github.com/QingWei-Li/docsify/commit/9208e64))
+
+
+
+<a name="4.5.2"></a>
+## [4.5.2](https://github.com/QingWei-Li/docsify/compare/v4.5.1...v4.5.2) (2017-11-09)
+
+
+### Features
+
+* github task lists, close [#215](https://github.com/QingWei-Li/docsify/issues/215) ([#305](https://github.com/QingWei-Li/docsify/issues/305)) ([d486eef](https://github.com/QingWei-Li/docsify/commit/d486eef))
+
+
+
+<a name="4.5.1"></a>
+## [4.5.1](https://github.com/QingWei-Li/docsify/compare/v4.5.0...v4.5.1) (2017-11-07)
+
+
+### Features
+
+* fetch files with the query params, fixed [#303](https://github.com/QingWei-Li/docsify/issues/303) ([2a2ed96](https://github.com/QingWei-Li/docsify/commit/2a2ed96))
+
+
+
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/QingWei-Li/docsify/compare/v4.4.1...v4.5.0) (2017-11-04)
+
+
+### Features
+
+* add disqus plugin, closed [#123](https://github.com/QingWei-Li/docsify/issues/123) ([fd7d4e0](https://github.com/QingWei-Li/docsify/commit/fd7d4e0))
+
+
+
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/QingWei-Li/docsify/compare/v4.4.0...v4.4.1) (2017-10-31)
+
+
+### Bug Fixes
+
+* {docsify-ignore-all} and {docsify-ignore} bug ([#299](https://github.com/QingWei-Li/docsify/issues/299)) ([cc98f56](https://github.com/QingWei-Li/docsify/commit/cc98f56))
+* zoom image plugin issue, fixed [#187](https://github.com/QingWei-Li/docsify/issues/187) ([#300](https://github.com/QingWei-Li/docsify/issues/300)) ([fa772cf](https://github.com/QingWei-Li/docsify/commit/fa772cf))
+
+
+
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/QingWei-Li/docsify/compare/v4.3.15...v4.4.0) (2017-10-30)
+
+
+### Bug Fixes
+
+* sidebar style issue on firefox, fixed [#184](https://github.com/QingWei-Li/docsify/issues/184) ([#297](https://github.com/QingWei-Li/docsify/issues/297)) ([36bfc9d](https://github.com/QingWei-Li/docsify/commit/36bfc9d))
+
+
+### Features
+
+* add helper for disabled link, fixed [#295](https://github.com/QingWei-Li/docsify/issues/295) ([#296](https://github.com/QingWei-Li/docsify/issues/296)) ([4ad96f3](https://github.com/QingWei-Li/docsify/commit/4ad96f3))
+
+
+
 <a name="4.3.15"></a>
 ## [4.3.15](https://github.com/QingWei-Li/docsify/compare/v4.3.14...v4.3.15) (2017-10-20)
 

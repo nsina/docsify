@@ -8,6 +8,20 @@ import { isAbsolutePath, getPath } from '../router/util'
 import { isFn, merge, cached } from '../util/core'
 
 const cachedLinks = {}
+function getAndRemoveConfig (str = '') {
+  const config = {}
+
+  if (str) {
+    str = str
+      .replace(/:([\w-]+)=?([\w-]+)?/g, (m, key, value) => {
+        config[key] = value || true
+        return ''
+      })
+      .trim()
+  }
+
+  return { str, config }
+}
 
 export class Compiler {
   constructor (config, router) {
@@ -25,9 +39,11 @@ export class Compiler {
     if (isFn(mdConf)) {
       compile = mdConf(marked, renderer)
     } else {
-      marked.setOptions(merge(mdConf, {
-        renderer: merge(renderer, mdConf.renderer)
-      }))
+      marked.setOptions(
+        merge(mdConf, {
+          renderer: merge(renderer, mdConf.renderer)
+        })
+      )
       compile = marked
     }
 
@@ -91,33 +107,43 @@ export class Compiler {
     }
     // highlight code
     origin.code = renderer.code = function (code, lang = '') {
-      const hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup)
+      const hl = Prism.highlight(
+        code,
+        Prism.languages[lang] || Prism.languages.markup
+      )
 
       return `<pre v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
     }
-    origin.link = renderer.link = function (href, title, text) {
-      let blank = ''
+    origin.link = renderer.link = function (href, title = '', text) {
+      let attrs = ''
 
-      if (!/:|(\/{2})/.test(href) &&
+      const { str, config } = getAndRemoveConfig(title)
+      title = str
+
+      if (
+        !/:|(\/{2})/.test(href) &&
         !_self.matchNotCompileLink(href) &&
-        !/(\s?:ignore)(\s\S+)?$/.test(title)) {
+        !config.ignore
+      ) {
         href = router.toURL(href, null, router.getCurrentPath())
       } else {
-        blank = ` target="${linkTarget}"`
-        title = title && title.replace(/:ignore/g, '').trim()
+        attrs += ` target="${linkTarget}"`
       }
 
-      let target = title && title.match(/:target=\w+/)
-      if (target) {
-        target = target[0]
-        title = title.replace(target, '')
-        blank = ' ' + target.slice(1)
+      if (config.target) {
+        attrs += ' target=' + config.target
+      }
+
+      if (config.disabled) {
+        attrs += ' disabled'
+        href = 'javascript:void(0)'
       }
 
       if (title) {
-        title = ` title="${title}"`
+        attrs += ` title="${title}"`
       }
-      return `<a href="${href}"${title || ''}${blank}>${text}</a>`
+
+      return `<a href="${href}"${attrs}>${text}</a>`
     }
     origin.paragraph = renderer.paragraph = function (text) {
       if (/^!&gt;/.test(text)) {
@@ -129,13 +155,33 @@ export class Compiler {
     }
     origin.image = renderer.image = function (href, title, text) {
       let url = href
-      const titleHTML = title ? ` title="${title}"` : ''
+      let attrs = ''
+
+      const { str, config } = getAndRemoveConfig(title)
+      title = str
+
+      if (config['no-zoom']) {
+        attrs += ' data-no-zoom'
+      }
+
+      if (title) {
+        attrs += ` title="${title}"`
+      }
 
       if (!isAbsolutePath(href)) {
         url = getPath(contentBase, href)
       }
 
-      return `<img src="${url}" data-origin="${href}" alt="${text}"${titleHTML}>`
+      return `<img src="${url}"data-origin="${href}" alt="${text}"${attrs}>`
+    }
+
+    const CHECKED_RE = /^\[([ x])\] +/
+    origin.listitem = renderer.listitem = function (text) {
+      const checked = CHECKED_RE.exec(text)
+      if (checked) {
+        text = text.replace(CHECKED_RE, `<input type="checkbox" ${checked[1] === 'x' ? 'checked' : ''} />`)
+      }
+      return `<li>${text}</li>\n`
     }
 
     renderer.origin = origin
@@ -173,11 +219,12 @@ export class Compiler {
     const currentPath = this.router.getCurrentPath()
     const { cacheTree, toc } = this
 
-    toc[0] && toc[0].ignoreAllSubs && (this.toc = [])
+    toc[0] && toc[0].ignoreAllSubs && toc.splice(0)
     toc[0] && toc[0].level === 1 && toc.shift()
-    toc.forEach((node, i) => {
-      node.ignoreSubHeading && toc.splice(i, 1)
-    })
+
+    for (let i = 0; i < toc.length; i++) {
+      toc[i].ignoreSubHeading && toc.splice(i, 1) && i--
+    }
 
     const tree = cacheTree[currentPath] || genTree(toc, level)
 

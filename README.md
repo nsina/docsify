@@ -46,6 +46,7 @@ Create an `index.html`.
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 </head>
@@ -84,6 +85,9 @@ These projects are using docsify to generate their sites. Pull requests welcome 
 | [vue2-datatable-component](https://github.com/OneWayTech/vue2-datatable) | The best Datatable for Vue.js 2.x which never sucks |
 | [Solidarity](https://infinitered.github.io/solidarity/) | Environment enforcer for your projects across machines. |
 | [rnback](https://rnback.com/) | Backend service for react-native applications. |
+| [IT-films](https://greybax.github.com/IT-films/) | A curated list of awesome movies, documentaries and TV series about hackers, geeks and IT in common, sorted by IMDB rating. |
+| [zooming](http://desmonding.me/zooming/docs) | Image zoom that makes sense. |
+| [vue-sticker](https://kamilocean.github.io/vue-sticker/#/) | Vue component, that helps to make sticky effects |
 
 ## Similar projects
 
