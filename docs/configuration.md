@@ -257,7 +257,8 @@ window.$docsify = {
   alias: {
     '/foo/(+*)': '/bar/$1', // supports regexp
     '/zh-cn/changelog': '/changelog',
-    '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG'
+    '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG',
+    '/.*/_sidebar.md': '/_sidebar.md' // See #301
   }
 }
 ```
@@ -342,7 +343,7 @@ window.$docsify = {
 ## external-link-target
 
 - type: `String`
-- default: `_self`
+- default: `_blank`
 
 Target to open external links. Default `'_blank'` (new window/tab)
 

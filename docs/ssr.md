@@ -30,7 +30,7 @@ Edit `package.json`. If the documentation in `./docs` subdirectory.
   ],
   "docsify": {
     "config": {
-      "basePath": 'https://docsify.js.org/',
+      "basePath": "https://docsify.js.org/",
       "loadSidebar": true,
       "loadNavbar": true,
       "coverpage": true,
@@ -60,7 +60,7 @@ Now, You have a support for SSR the docs site.
 
 ## Custom template
 
-You can provide a templte for entire page's HTML. such as
+You can provide a template for entire page's HTML. such as
 
 ```html
 <!DOCTYPE html>
@@ -74,12 +74,12 @@ You can provide a templte for entire page's HTML. such as
 <body>
   <!--inject-app-->
   <!--inject-config-->
+  <script src="//unpkg.com/docsify/lib/docsify.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
 </body>
-<script src="//unpkg.com/docsify/lib/docsify.js"></script>
-<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
 </html>
 ```
 
@@ -94,6 +94,7 @@ You can configure it in a special config file, or `package.json`.
 ```js
 module.exports = {
   template: './ssr.html',
+  maxAge: 60 * 60 * 1000, // lru-cache config
   config: {
    // docsify config
   }

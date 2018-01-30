@@ -83,6 +83,15 @@
 <script src="//unpkg.com/docsify/lib/plugins/external-script.js"></script>
 ```
 
+## Demo code with instant preview and jsfiddle integration
+
+With this plugin, sample code can be rendered on the page instantly, so that the readers can see the preview immediately.
+When readers expand the demo box, the source code and description are shown there. if they click the button `Try in Jsfiddle`,
+`jsfiddle.net` will be open with the code of this sample, which allow readers to revise the code and try on their own.
+
+[Vue](https://njleonzhang.github.io/docsify-demo-box-vue/) and [React](https://njleonzhang.github.io/docsify-demo-box-react/) are both supported.
+
+
 ## 图片缩放 - Zoom image
 
 Medium's 风格的图片缩放插件. 基于 [medium-zoom](https://github.com/francoischalifour/medium-zoom)。
@@ -105,17 +114,68 @@ Medium's 风格的图片缩放插件. 基于 [medium-zoom](https://github.com/fr
 在每一页上添加 `Edit on github` 按钮. 由第三方库提供, 查看 [document](https://github.com/njleonzhang/docsify-edit-on-github)
 
 
-## CodeSponsor
+## Copy to Clipboard
 
-参考 https://codesponsor.io
+Add a simple `Click to copy` button to all preformatted code blocks to effortlessly allow users to copy example code from your docs. Provided by [@jperasmus](https://github.com/jperasmus)
 
+```html
+<link rel="stylesheet" href="//unpkg.com/docsify-copy-code/styles.css">
+<script src="//unpkg.com/docsify-copy-code/index.js"></script>
+```
+
+```javascript
+window.$docsify = {
+  plugins: [
+    window.DocsifyCopyCodePlugin.init()
+  ]
+}
+```
+
+See [here](https://github.com/jperasmus/docsify-copy-code/blob/master/README.md) for more details.
+
+
+
+## Disqus
+
+Disqus comments. https://disqus.com/
 
 ```html
 <script>
   window.$docsify = {
-    codesponsor: 'id'
+    disqus: 'shortname'
   }
 </script>
-<script src="//unpkg.com/docsify/lib/plugins/codesponsor.min.js"></script>
+<script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
 ```
 
+
+## Gitalk
+
+[Gitalk](https://github.com/gitalk/gitalk) is a modern comment component based on Github Issue and Preact. 
+
+```html
+<link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: 'Github Application Client ID',
+    clientSecret: 'Github Application Client Secret',
+    repo: 'Github repo',
+    owner: 'Github repo owner',
+    admin: ['Github repo collaborators, only these guys can initialize github issues'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false
+  })
+</script>
+```
+
+## Navigation
+
+Pagination for docsify. By [@imyelo](https://github.com/imyelo)
+
+```html
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+```

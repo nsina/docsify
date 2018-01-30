@@ -1,3 +1,48 @@
+<a name="4.5.7"></a>
+## [4.5.7](https://github.com/QingWei-Li/docsify/compare/v4.5.6...v4.5.7) (2017-12-29)
+
+
+### Features
+
+* add navigation plugin, closed [#180](https://github.com/QingWei-Li/docsify/issues/180) ([f78be4c](https://github.com/QingWei-Li/docsify/commit/f78be4c))
+
+
+
+<a name="4.5.6"></a>
+## [4.5.6](https://github.com/QingWei-Li/docsify/compare/v4.5.3...v4.5.6) (2017-12-14)
+
+
+### Bug Fixes
+
+* **style:** increase the tap targets of menu button, fixed [#325](https://github.com/QingWei-Li/docsify/issues/325) ([888f217](https://github.com/QingWei-Li/docsify/commit/888f217))
+
+
+
+<a name="4.5.5"></a>
+## [4.5.5](https://github.com/QingWei-Li/docsify/compare/v4.5.4...v4.5.5) (2017-11-30)
+
+
+### Bug Fixes
+
+* disqus plugin issue ([#318](https://github.com/QingWei-Li/docsify/issues/318)) ([041b33e](https://github.com/QingWei-Li/docsify/commit/041b33e)), closes [#317](https://github.com/QingWei-Li/docsify/issues/317)
+
+
+
+<a name="4.5.4"></a>
+## [4.5.4](https://github.com/QingWei-Li/docsify/compare/v4.5.2...v4.5.4) (2017-11-29)
+
+
+### Bug Fixes
+
+* **compiler:** task lists style, fixed [#215](https://github.com/QingWei-Li/docsify/issues/215) ([e43ded4](https://github.com/QingWei-Li/docsify/commit/e43ded4))
+
+
+### Features
+
+* add gitalk plugin ([#306](https://github.com/QingWei-Li/docsify/issues/306)) ([9208e64](https://github.com/QingWei-Li/docsify/commit/9208e64))
+
+
+
 <a name="4.5.3"></a>
 ## [4.5.3](https://github.com/QingWei-Li/docsify/compare/v4.5.2...v4.5.3) (2017-11-11)
 
@@ -360,7 +405,7 @@
 
 ### Bug Fixes
 
-* **render:** ubtitle in side bar shows undefined, fixed [#182](https://github.com/QingWei-Li/docsify/issues/182) ([d087d57](https://github.com/QingWei-Li/docsify/commit/d087d57))
+* **render:** subtitle in side bar shows undefined, fixed [#182](https://github.com/QingWei-Li/docsify/issues/182) ([d087d57](https://github.com/QingWei-Li/docsify/commit/d087d57))
 
 
 

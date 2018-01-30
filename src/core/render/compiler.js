@@ -61,7 +61,7 @@ export class Compiler {
   }
 
   matchNotCompileLink (link) {
-    const links = this.config.noCompileLinks
+    const links = this.config.noCompileLinks || []
 
     for (var i = 0; i < links.length; i++) {
       const n = links[i]
@@ -181,7 +181,7 @@ export class Compiler {
       if (checked) {
         text = text.replace(CHECKED_RE, `<input type="checkbox" ${checked[1] === 'x' ? 'checked' : ''} />`)
       }
-      return `<li>${text}</li>\n`
+      return `<li${checked ? ` class="task-list-item"` : ''}>${text}</li>\n`
     }
 
     renderer.origin = origin
