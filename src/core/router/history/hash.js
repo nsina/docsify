@@ -1,31 +1,27 @@
-import { History } from './base'
-import { merge, cached, noop } from '../../util/core'
-import { on } from '../../util/dom'
-import { parseQuery, stringifyQuery, cleanPath } from '../util'
+import {History} from './base'
+import {noop} from '../../util/core'
+import {on} from '../../util/dom'
+import {parseQuery, cleanPath, replaceSlug} from '../util'
 
-function replaceHash (path) {
+function replaceHash(path) {
   const i = location.href.indexOf('#')
   location.replace(location.href.slice(0, i >= 0 ? i : 0) + '#' + path)
 }
 
-const replaceSlug = cached(path => {
-  return path.replace('#', '?id=')
-})
-
 export class HashHistory extends History {
-  constructor (config) {
+  constructor(config) {
     super(config)
     this.mode = 'hash'
   }
 
-  getBasePath () {
+  getBasePath() {
     const path = window.location.pathname || ''
     const base = this.config.basePath
 
     return /^(\/|https?:)/g.test(base) ? base : cleanPath(path + '/' + base)
   }
 
-  getCurrentPath () {
+  getCurrentPath() {
     // We can't use location.hash here because it's not
     // consistent across browsers - Firefox will pre-decode it!
     const href = location.href
@@ -33,16 +29,18 @@ export class HashHistory extends History {
     return index === -1 ? '' : href.slice(index + 1)
   }
 
-  onchange (cb = noop) {
+  onchange(cb = noop) {
     on('hashchange', cb)
   }
 
-  normalize () {
+  normalize() {
     let path = this.getCurrentPath()
 
     path = replaceSlug(path)
 
-    if (path.charAt(0) === '/') return replaceHash(path)
+    if (path.charAt(0) === '/') {
+      return replaceHash(path)
+    }
     replaceHash('/' + path)
   }
 
@@ -51,7 +49,7 @@ export class HashHistory extends History {
    * @param {string} [path=location.herf]
    * @return {object} { path, query }
    */
-  parse (path = location.href) {
+  parse(path = location.href) {
     let query = ''
 
     const hashIndex = path.indexOf('#')
@@ -72,20 +70,7 @@ export class HashHistory extends History {
     }
   }
 
-  toURL (path, params, currentRoute) {
-    const local = currentRoute && path[0] === '#'
-    const route = this.parse(replaceSlug(path))
-
-    route.query = merge({}, route.query, params)
-    path = route.path + stringifyQuery(route.query)
-    path = path.replace(/\.md(\?)|\.md$/, '$1')
-
-    if (local) {
-      const idIndex = currentRoute.indexOf('?')
-      path =
-        (idIndex > 0 ? currentRoute.substr(0, idIndex) : currentRoute) + path
-    }
-
-    return cleanPath('#/' + path)
+  toURL(path, params, currentRoute) {
+    return '#' + super.toURL(path, params, currentRoute)
   }
 }

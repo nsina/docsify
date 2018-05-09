@@ -1,11 +1,11 @@
-import { isMobile } from '../util/env'
+import {isMobile} from '../util/env'
 import * as dom from '../util/dom'
 
 const title = dom.$.title
 /**
  * Toggle button
  */
-export function btn (el, router) {
+export function btn(el) {
   const toggle = _ => dom.body.classList.toggle('close')
 
   el = dom.getNode(el)
@@ -14,22 +14,33 @@ export function btn (el, router) {
     toggle()
   })
 
-  const sidebar = dom.getNode('.sidebar')
-
   isMobile &&
     dom.on(
       dom.body,
       'click',
       _ => dom.body.classList.contains('close') && toggle()
     )
-  dom.on(sidebar, 'click', _ =>
-    setTimeout((_ => getAndActive(router, sidebar, true, true), 0))
-  )
 }
 
-export function sticky () {
+export function collapse(el) {
+  el = dom.getNode(el)
+
+  dom.on(el, 'click', ({target}) => {
+    if (
+      target.nodeName === 'A' &&
+      target.nextSibling &&
+      target.nextSibling.classList.contains('app-sub-sidebar')
+    ) {
+      dom.toggleClass(target.parentNode, 'collapse')
+    }
+  })
+}
+
+export function sticky() {
   const cover = dom.getNode('section.cover')
-  if (!cover) return
+  if (!cover) {
+    return
+  }
   const coverHeight = cover.getBoundingClientRect().height
 
   if (window.pageYOffset >= coverHeight || cover.classList.contains('hidden')) {
@@ -47,7 +58,7 @@ export function sticky () {
  * @param  {Boolean} autoTitle  auto set title
  * @return {element}
  */
-export function getAndActive (router, el, isParent, autoTitle) {
+export function getAndActive(router, el, isParent, autoTitle) {
   el = dom.getNode(el)
 
   const links = dom.findAll(el, 'a')

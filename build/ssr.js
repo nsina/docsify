@@ -5,11 +5,12 @@ var replace = require('rollup-plugin-replace')
 
 rollup
   .rollup({
-    entry: 'packages/docsify-server-renderer/index.js',
+    input: 'packages/docsify-server-renderer/index.js',
     plugins: [
       async(),
       replace({
-        __VERSION__: process.env.VERSION || require('../package.json').version
+        __VERSION__: process.env.VERSION || require('../package.json').version,
+        'process.env.SSR': true
       }),
       buble({
         transforms: {
@@ -25,7 +26,7 @@ rollup
     console.log(dest)
     bundle.write({
       format: 'cjs',
-      dest: dest
+      file: dest
     })
   })
   .catch(function (err) {

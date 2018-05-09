@@ -1,15 +1,15 @@
 import config from '../config'
-import { initLifecycle, callHook } from './lifecycle'
-import { initRender } from '../render'
-import { initRouter } from '../router'
-import { initEvent } from '../event'
-import { initFetch } from '../fetch'
-import { isFn } from '../util/core'
+import {initLifecycle, callHook} from './lifecycle'
+import {initRender} from '../render'
+import {initRouter} from '../router'
+import {initEvent} from '../event'
+import {initFetch} from '../fetch'
+import {isFn} from '../util/core'
 
-export function initMixin (proto) {
+export function initMixin(proto) {
   proto._init = function () {
     const vm = this
-    vm.config = config || {}
+    vm.config = config()
 
     initLifecycle(vm) // Init hooks
     initPlugin(vm) // Install plugins
@@ -22,6 +22,6 @@ export function initMixin (proto) {
   }
 }
 
-function initPlugin (vm) {
+function initPlugin(vm) {
   [].concat(vm.config.plugins).forEach(fn => isFn(fn) && fn(vm._lifecycle, vm))
 }

@@ -1,14 +1,13 @@
-import { History } from './base'
-import { parseQuery, stringifyQuery, cleanPath } from '../util'
-import { merge } from '../../util/core'
+import {History} from './base'
+import {parseQuery} from '../util'
 
 export class AbstractHistory extends History {
-  constructor (config) {
+  constructor(config) {
     super(config)
     this.mode = 'abstract'
   }
 
-  parse (path) {
+  parse(path) {
     let query = ''
 
     const queryIndex = path.indexOf('?')
@@ -22,18 +21,5 @@ export class AbstractHistory extends History {
       file: this.getFile(path),
       query: parseQuery(query)
     }
-  }
-
-  toURL (path, params, currentRoute) {
-    const local = currentRoute && path[0] === '#'
-    const route = this.parse(path)
-
-    route.query = merge({}, route.query, params)
-    path = route.path + stringifyQuery(route.query)
-    path = path.replace(/\.md(\?)|\.md$/, '$1')
-
-    if (local) path = currentRoute + path
-
-    return cleanPath('/' + path)
   }
 }

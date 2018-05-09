@@ -2,50 +2,56 @@ import * as dom from '../util/dom'
 import * as tpl from './tpl'
 import cssVars from '../util/polyfill/css-vars'
 import tinydate from 'tinydate'
-import { callHook } from '../init/lifecycle'
-import { Compiler } from './compiler'
-import { getAndActive, sticky } from '../event/sidebar'
-import { getPath, isAbsolutePath } from '../router/util'
-import { isMobile } from '../util/env'
-import { isPrimitive } from '../util/core'
-import { scrollActiveSidebar, scroll2Top } from '../event/scroll'
+import {callHook} from '../init/lifecycle'
+import {Compiler} from './compiler'
+import {getAndActive, sticky} from '../event/sidebar'
+import {getPath, isAbsolutePath} from '../router/util'
+import {isMobile, inBrowser} from '../util/env'
+import {isPrimitive} from '../util/core'
+import {scrollActiveSidebar, scroll2Top} from '../event/scroll'
+import {prerenderEmbed} from './embed'
 
-function executeScript () {
-  const script = dom.findAll('.markdown-section>script')
-      .filter(s => !/template/.test(s.type))[0]
-  if (!script) return false
+function executeScript() {
+  const script = dom
+    .findAll('.markdown-section>script')
+    .filter(s => !/template/.test(s.type))[0]
+  if (!script) {
+    return false
+  }
   const code = script.innerText.trim()
-  if (!code) return false
+  if (!code) {
+    return false
+  }
 
   setTimeout(_ => {
     window.__EXECUTE_RESULT__ = new Function(code)()
   }, 0)
 }
 
-function formatUpdated (html, updated, fn) {
-  updated = typeof fn === 'function'
-    ? fn(updated)
-    : typeof fn === 'string'
-      ? tinydate(fn)(new Date(updated))
-      : updated
+function formatUpdated(html, updated, fn) {
+  updated =
+    typeof fn === 'function' ?
+      fn(updated) :
+      typeof fn === 'string' ? tinydate(fn)(new Date(updated)) : updated
 
   return html.replace(/{docsify-updated}/g, updated)
 }
 
-function renderMain (html) {
+function renderMain(html) {
   if (!html) {
-    // TODO: Custom 404 page
-    html = 'not found'
+    html = '<h1>404 - Not found</h1>'
   }
 
   this._renderTo('.markdown-section', html)
   // Render sidebar with the TOC
   !this.config.loadSidebar && this._renderSidebar()
 
-  // execute script
-  if (this.config.executeScript !== false &&
-      typeof window.Vue !== 'undefined' &&
-      !executeScript()) {
+  // Execute script
+  if (
+    this.config.executeScript !== false &&
+    typeof window.Vue !== 'undefined' &&
+    !executeScript()
+  ) {
     setTimeout(_ => {
       const vueVM = window.__EXECUTE_RESULT__
       vueVM && vueVM.$destroy && vueVM.$destroy()
@@ -56,12 +62,14 @@ function renderMain (html) {
   }
 }
 
-function renderNameLink (vm) {
+function renderNameLink(vm) {
   const el = dom.getNode('.app-name-link')
   const nameLink = vm.config.nameLink
   const path = vm.route.path
 
-  if (!el) return
+  if (!el) {
+    return
+  }
 
   if (isPrimitive(vm.config.nameLink)) {
     el.setAttribute('href', nameLink)
@@ -72,29 +80,32 @@ function renderNameLink (vm) {
   }
 }
 
-export function renderMixin (proto) {
+export function renderMixin(proto) {
   proto._renderTo = function (el, content, replace) {
     const node = dom.getNode(el)
-    if (node) node[replace ? 'outerHTML' : 'innerHTML'] = content
+    if (node) {
+      node[replace ? 'outerHTML' : 'innerHTML'] = content
+    }
   }
 
   proto._renderSidebar = function (text) {
-    const { maxLevel, subMaxLevel, loadSidebar } = this.config
+    const {maxLevel, subMaxLevel, loadSidebar} = this.config
 
     this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
     const activeEl = getAndActive(this.router, '.sidebar-nav', true, true)
     if (loadSidebar && activeEl) {
-      activeEl.parentNode.innerHTML += (this.compiler.subSidebar(subMaxLevel) || '')
+      activeEl.parentNode.innerHTML +=
+        this.compiler.subSidebar(subMaxLevel) || ''
     } else {
-      // reset toc
+      // Reset toc
       this.compiler.subSidebar()
     }
-    // bind event
+    // Bind event
     this._bindEventOnRendered(activeEl)
   }
 
   proto._bindEventOnRendered = function (activeEl) {
-    const { autoHeader, auto2top } = this.config
+    const {autoHeader, auto2top} = this.config
 
     scrollActiveSidebar(this.router)
 
@@ -113,26 +124,49 @@ export function renderMixin (proto) {
 
   proto._renderNav = function (text) {
     text && this._renderTo('nav', this.compiler.compile(text))
-    getAndActive(this.router, 'nav')
+    if (this.config.loadNavbar) {
+      getAndActive(this.router, 'nav')
+    }
   }
 
-  proto._renderMain = function (text, opt = {}) {
+  proto._renderMain = function (text, opt = {}, next) {
     if (!text) {
       return renderMain.call(this, text)
     }
 
     callHook(this, 'beforeEach', text, result => {
-      let html = this.isHTML ? result : this.compiler.compile(result)
-      if (opt.updatedAt) {
-        html = formatUpdated(html, opt.updatedAt, this.config.formatUpdated)
-      }
+      let html
+      const callback = () => {
+        if (opt.updatedAt) {
+          html = formatUpdated(html, opt.updatedAt, this.config.formatUpdated)
+        }
 
-      callHook(this, 'afterEach', html, text => renderMain.call(this, text))
+        callHook(this, 'afterEach', html, text => renderMain.call(this, text))
+      }
+      if (this.isHTML) {
+        html = this.result = text
+        callback()
+        next()
+      } else {
+        prerenderEmbed(
+          {
+            compiler: this.compiler,
+            raw: result
+          },
+          tokens => {
+            html = this.compiler.compile(tokens)
+            callback()
+            next()
+          }
+        )
+      }
     })
   }
 
-  proto._renderCover = function (text) {
+  proto._renderCover = function (text, coverOnly) {
     const el = dom.getNode('.cover')
+
+    dom.toggleClass(dom.getNode('main'), coverOnly ? 'add' : 'remove', 'hidden')
     if (!text) {
       dom.toggleClass(el, 'remove', 'show')
       return
@@ -140,7 +174,9 @@ export function renderMixin (proto) {
     dom.toggleClass(el, 'add', 'show')
 
     let html = this.coverIsHTML ? text : this.compiler.cover(text)
-    const m = html.trim().match('<p><img.*?data-origin="(.*?)"[^a]+alt="(.*?)">([^<]*?)</p>$')
+    const m = html
+      .trim()
+      .match('<p><img.*?data-origin="(.*?)"[^a]+alt="(.*?)">([^<]*?)</p>$')
 
     if (m) {
       if (m[2] === 'color') {
@@ -164,16 +200,19 @@ export function renderMixin (proto) {
   }
 
   proto._updateRender = function () {
-    // render name link
+    // Render name link
     renderNameLink(this)
   }
 }
 
-export function initRender (vm) {
+export function initRender(vm) {
   const config = vm.config
 
   // Init markdown compiler
   vm.compiler = new Compiler(config, vm.router)
+  if (inBrowser) {
+    window.__current_docsify_compiler__ = vm.compiler
+  }
 
   const id = config.el || '#app'
   const navEl = dom.find('nav') || dom.create('nav')
@@ -208,7 +247,9 @@ export function initRender (vm) {
   }
 
   // Add nav
-  dom.before(navAppendToTarget, navEl)
+  if (config.loadNavbar) {
+    dom.before(navAppendToTarget, navEl)
+  }
 
   if (config.themeColor) {
     dom.$.head.appendChild(

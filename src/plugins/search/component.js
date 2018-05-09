@@ -1,8 +1,8 @@
-import { search } from './search'
+import {search} from './search'
 
 let NO_DATA_TEXT = ''
 
-function style () {
+function style() {
   const code = `
 .sidebar {
   padding-top: 0;
@@ -12,6 +12,11 @@ function style () {
   margin-bottom: 20px;
   padding: 6px;
   border-bottom: 1px solid #eee;
+}
+
+.search .input-wrap {
+  display: flex;
+  align-items: center;
 }
 
 .search .results-panel {
@@ -26,12 +31,30 @@ function style () {
   outline: none;
   border: none;
   width: 100%;
-  padding: 7px;
-  line-height: 22px;
+  padding: 0 7px;
+  line-height: 36px;
   font-size: 14px;
+}
+
+.search input::-webkit-search-decoration,
+.search input::-webkit-search-cancel-button,
+.search input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+.search .clear-button {
+  width: 36px;
+  text-align: right;
+  display: none;
+}
+
+.search .clear-button.show {
+  display: block;
+}
+
+.search .clear-button svg {
+  transform: scale(.5);
 }
 
 .search h2 {
@@ -68,11 +91,20 @@ function style () {
   Docsify.dom.style(code)
 }
 
-function tpl (opts, defaultValue = '') {
+function tpl(opts, defaultValue = '') {
   const html =
-    `<input type="search" value="${defaultValue}" />` +
-    '<div class="results-panel"></div>' +
-    '</div>'
+    `<div class="input-wrap">
+      <input type="search" value="${defaultValue}" />
+      <div class="clear-button">
+        <svg width="26" height="24">
+          <circle cx="12" cy="12" r="11" fill="#ccc" />
+          <path stroke="white" stroke-width="2" d="M8.25,8.25,15.75,15.75" />
+          <path stroke="white" stroke-width="2"d="M8.25,15.75,15.75,8.25" />
+        </svg>
+      </div>
+    </div>
+    <div class="results-panel"></div>
+    </div>`
   const el = Docsify.dom.create('div', html)
   const aside = Docsify.dom.find('aside')
 
@@ -80,12 +112,14 @@ function tpl (opts, defaultValue = '') {
   Docsify.dom.before(aside, el)
 }
 
-function doSearch (value) {
+function doSearch(value) {
   const $search = Docsify.dom.find('div.search')
   const $panel = Docsify.dom.find($search, '.results-panel')
+  const $clearBtn = Docsify.dom.find($search, '.clear-button')
 
   if (!value) {
     $panel.classList.remove('show')
+    $clearBtn.classList.remove('show')
     $panel.innerHTML = ''
     return
   }
@@ -94,7 +128,7 @@ function doSearch (value) {
   let html = ''
   matchs.forEach(post => {
     html += `<div class="matching-post">
-<a href="${post.url}">    
+<a href="${post.url}">
 <h2>${post.title}</h2>
 <p>${post.content}</p>
 </a>
@@ -102,12 +136,14 @@ function doSearch (value) {
   })
 
   $panel.classList.add('show')
+  $clearBtn.classList.add('show')
   $panel.innerHTML = html || `<p class="empty">${NO_DATA_TEXT}</p>`
 }
 
-function bindEvents () {
+function bindEvents() {
   const $search = Docsify.dom.find('div.search')
   const $input = Docsify.dom.find($search, 'input')
+  const $inputWrap = Docsify.dom.find($search, '.input-wrap')
 
   let timeId
   // Prevent to Fold sidebar
@@ -120,12 +156,21 @@ function bindEvents () {
     clearTimeout(timeId)
     timeId = setTimeout(_ => doSearch(e.target.value.trim()), 100)
   })
+  Docsify.dom.on($inputWrap, 'click', e => {
+    // Click input outside
+    if (e.target.tagName !== 'INPUT') {
+      $input.value = ''
+      doSearch()
+    }
+  })
 }
 
-function updatePlaceholder (text, path) {
+function updatePlaceholder(text, path) {
   const $input = Docsify.dom.getNode('.search input[type="search"]')
 
-  if (!$input) return
+  if (!$input) {
+    return
+  }
   if (typeof text === 'string') {
     $input.placeholder = text
   } else {
@@ -134,7 +179,7 @@ function updatePlaceholder (text, path) {
   }
 }
 
-function updateNoData (text, path) {
+function updateNoData(text, path) {
   if (typeof text === 'string') {
     NO_DATA_TEXT = text
   } else {
@@ -143,7 +188,7 @@ function updateNoData (text, path) {
   }
 }
 
-export function init (opts, vm) {
+export function init(opts, vm) {
   const keywords = vm.router.parse().query.s
 
   style()
@@ -152,7 +197,7 @@ export function init (opts, vm) {
   keywords && setTimeout(_ => doSearch(keywords), 500)
 }
 
-export function update (opts, vm) {
+export function update(opts, vm) {
   updatePlaceholder(opts.placeholder, vm.route.path)
   updateNoData(opts.noData, vm.route.path)
 }
