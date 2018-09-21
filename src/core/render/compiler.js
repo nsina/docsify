@@ -163,7 +163,7 @@ export class Compiler {
 
     /**
      * Render anchor tag
-     * @link https://github.com/chjj/marked#overriding-renderer-methods
+     * @link https://github.com/markedjs/marked#overriding-renderer-methods
      */
     origin.heading = renderer.heading = function (text, level) {
       const nextToc = {level, title: text}
@@ -204,7 +204,7 @@ export class Compiler {
       title = str
 
       if (
-        !/:|(\/{2})/.test(href) &&
+        !isAbsolutePath(href) &&
         !_self._matchNotCompileLink(href) &&
         !config.ignore
       ) {
@@ -257,6 +257,16 @@ export class Compiler {
         attrs += ` title="${title}"`
       }
 
+      const size = config.size
+      if (size) {
+        const sizes = size.split('x')
+        if (sizes[1]) {
+          attrs += 'width=' + sizes[0] + ' height=' + sizes[1]
+        } else {
+          attrs += 'width=' + sizes[0]
+        }
+      }
+
       if (!isAbsolutePath(href)) {
         url = getPath(contentBase, getParentPath(router.getCurrentPath()), href)
       }
@@ -290,10 +300,9 @@ export class Compiler {
 
     if (text) {
       html = this.compile(text)
-      html = html && html.match(/<ul[^>]*>([\s\S]+)<\/ul>/g)[0]
     } else {
       const tree = this.cacheTree[currentPath] || genTree(this.toc, level)
-      html = treeTpl(tree, '<ul>')
+      html = treeTpl(tree, '<ul>{inner}</ul>')
       this.cacheTree[currentPath] = tree
     }
 
@@ -322,7 +331,7 @@ export class Compiler {
 
     cacheTree[currentPath] = tree
     this.toc = []
-    return treeTpl(tree, '<ul class="app-sub-sidebar">')
+    return treeTpl(tree)
   }
 
   article(text) {
