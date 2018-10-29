@@ -30,6 +30,11 @@ const compileMedia = {
       url
     }
   },
+  mermaid(url) {
+    return {
+      url
+    }
+  },
   iframe(url, title) {
     return {
       code: `<iframe src="${url}" ${title || 'width=100% height=400'}></iframe>`
@@ -85,24 +90,38 @@ export class Compiler {
     }
 
     this._marked = compile
-    this.compile = cached(text => {
-      let html = ''
+    this.compile = text => {
+      let isCached = true
+      const result = cached(_ => {
+        isCached = false
+        let html = ''
 
-      if (!text) {
-        return text
-      }
+        if (!text) {
+          return text
+        }
 
-      if (isPrimitive(text)) {
-        html = compile(text)
+        if (isPrimitive(text)) {
+          html = compile(text)
+        } else {
+          html = compile.parser(text)
+        }
+
+        html = config.noEmoji ? html : emojify(html)
+        slugify.clear()
+
+        return html
+      })(text)
+
+      const curFileName = this.router.parse().file
+
+      if (isCached) {
+        this.toc = this.cacheTOC[curFileName]
       } else {
-        html = compile.parser(text)
+        this.cacheTOC[curFileName] = [...this.toc]
       }
 
-      html = config.noEmoji ? html : emojify(html)
-      slugify.clear()
-
-      return html
-    })
+      return result
+    }
   }
 
   compileEmbed(href, title) {
@@ -127,6 +146,8 @@ export class Compiler {
         let type = 'code'
         if (/\.(md|markdown)/.test(href)) {
           type = 'markdown'
+        } else if (/\.mmd/.test(href)) {
+          type = 'mermaid'
         } else if (/\.html?/.test(href)) {
           type = 'iframe'
         } else if (/\.(mp4|ogg)/.test(href)) {
@@ -213,7 +234,7 @@ export class Compiler {
         }
         href = router.toURL(href, null, router.getCurrentPath())
       } else {
-        attrs += ` target="${linkTarget}"`
+        attrs += href.startsWith('mailto:') ? '' : ` target="${linkTarget}"`
       }
 
       if (config.target) {
