@@ -88,9 +88,58 @@ You will get `<a href="/demo/">link</a>`html. Do not worry, you can still set ti
 ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
 
 <!-- Support percentage -->
+
 ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
 ```
 
 ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
 ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
 ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
+
+## Customise ID for headings
+
+```md
+### 你好，世界！ :id=hello-world
+```
+
+## Markdown in html tag
+
+You need to insert a space between the html and markdown content.
+This is useful for rendering markdown content in the details element.
+
+```markdown
+<details>
+<summary>Self-assessment (Click to expand)</summary>
+
+- Abc
+- Abc
+
+</details>
+```
+
+<details>
+<summary>Self-assessment (Click to expand)</summary>
+
+- Abc
+- Abc
+
+</details>
+
+Or markdown content can be wrapped in html tag.
+
+```markdown
+<div style='color: red'>
+
+- listitem
+- listitem
+- listitem
+
+</div>
+```
+
+<div style='color: red'>
+
+- Abc
+- Abc
+
+</div>

@@ -1,6 +1,6 @@
 {
   "name": "docsify",
-  "version": "4.7.1",
+  "version": "4.8.6",
   "description": "A magical documentation generator.",
   "author": {
     "name": "qingwei-li",
@@ -42,10 +42,10 @@
     "postinstall": "opencollective postinstall"
   },
   "dependencies": {
-    "marked": "^0.3.12",
+    "marked": "^0.5.1",
     "medium-zoom": "^0.4.0",
     "opencollective": "^1.0.3",
-    "prismjs": "^1.9.0",
+    "prismjs": "^1.15.0",
     "tinydate": "^1.0.0",
     "tweezer.js": "^1.4.0"
   },
@@ -65,7 +65,6 @@
     "rollup-plugin-async": "^1.2.0",
     "rollup-plugin-buble": "^0.18.0",
     "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1",

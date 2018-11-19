@@ -7,6 +7,9 @@ import {emojify} from './emojify'
 import {isAbsolutePath, getPath, getParentPath} from '../router/util'
 import {isFn, merge, cached, isPrimitive} from '../util/core'
 
+// See https://github.com/PrismJS/prism/pull/1367
+import 'prismjs/components/prism-markup-templating'
+
 const cachedLinks = {}
 
 export function getAndRemoveConfig(str = '') {
@@ -14,6 +17,8 @@ export function getAndRemoveConfig(str = '') {
 
   if (str) {
     str = str
+      .replace(/^'/, '')
+      .replace(/'$/, '')
       .replace(/:([\w-]+)=?([\w-]+)?/g, (m, key, value) => {
         config[key] = (value && value.replace(/&quot;/g, '')) || true
         return ''
@@ -37,17 +42,17 @@ const compileMedia = {
   },
   iframe(url, title) {
     return {
-      code: `<iframe src="${url}" ${title || 'width=100% height=400'}></iframe>`
+      html: `<iframe src="${url}" ${title || 'width=100% height=400'}></iframe>`
     }
   },
   video(url, title) {
     return {
-      code: `<video src="${url}" ${title || 'controls'}>Not Support</video>`
+      html: `<video src="${url}" ${title || 'controls'}>Not Support</video>`
     }
   },
   audio(url, title) {
     return {
-      code: `<audio src="${url}" ${title || 'controls'}>Not Support</audio>`
+      html: `<audio src="${url}" ${title || 'controls'}>Not Support</audio>`
     }
   },
   code(url, title) {
@@ -71,6 +76,7 @@ export class Compiler {
     this.router = router
     this.cacheTree = {}
     this.toc = []
+    this.cacheTOC = {}
     this.linkTarget = config.externalLinkTarget || '_blank'
     this.contentBase = router.getBasePath()
 
@@ -187,26 +193,27 @@ export class Compiler {
      * @link https://github.com/markedjs/marked#overriding-renderer-methods
      */
     origin.heading = renderer.heading = function (text, level) {
-      const nextToc = {level, title: text}
+      let {str, config} = getAndRemoveConfig(text)
+      const nextToc = {level, title: str}
 
-      if (/{docsify-ignore}/g.test(text)) {
-        text = text.replace('{docsify-ignore}', '')
-        nextToc.title = text
+      if (/{docsify-ignore}/g.test(str)) {
+        str = str.replace('{docsify-ignore}', '')
+        nextToc.title = str
         nextToc.ignoreSubHeading = true
       }
 
-      if (/{docsify-ignore-all}/g.test(text)) {
-        text = text.replace('{docsify-ignore-all}', '')
-        nextToc.title = text
+      if (/{docsify-ignore-all}/g.test(str)) {
+        str = str.replace('{docsify-ignore-all}', '')
+        nextToc.title = str
         nextToc.ignoreAllSubs = true
       }
 
-      const slug = slugify(text)
+      const slug = slugify(config.id || str)
       const url = router.toURL(router.getCurrentPath(), {id: slug})
       nextToc.slug = url
       _self.toc.push(nextToc)
 
-      return `<h${level} id="${slug}"><a href="${url}" data-id="${slug}" class="anchor"><span>${text}</span></a></h${level}>`
+      return `<h${level} id="${slug}"><a href="${url}" data-id="${slug}" class="anchor"><span>${str}</span></a></h${level}>`
     }
     // Highlight code
     origin.code = renderer.code = function (code, lang = '') {
@@ -234,7 +241,7 @@ export class Compiler {
         }
         href = router.toURL(href, null, router.getCurrentPath())
       } else {
-        attrs += href.startsWith('mailto:') ? '' : ` target="${linkTarget}"`
+        attrs += href.indexOf('mailto:') === 0 ? '' : ` target="${linkTarget}"`
       }
 
       if (config.target) {
@@ -293,18 +300,6 @@ export class Compiler {
       }
 
       return `<img src="${url}"data-origin="${href}" alt="${text}"${attrs}>`
-    }
-
-    const CHECKED_RE = /^\[([ x])\] +/
-    origin.listitem = renderer.listitem = function (text) {
-      const checked = CHECKED_RE.exec(text)
-      if (checked) {
-        text = text.replace(
-          CHECKED_RE,
-          `<input type="checkbox" ${checked[1] === 'x' ? 'checked' : ''} />`
-        )
-      }
-      return `<li${checked ? ` class="task-list-item"` : ''}>${text}</li>\n`
     }
 
     renderer.origin = origin
