@@ -11,17 +11,17 @@ See the [Quick start](quickstart.md) guide for more details.
 ## Features
 
 - No statically built html files
-- Simple and lightweight (~21kB gzipped)
+- Simple and lightweight
 - Smart full-text search plugin
 - Multiple themes
 - Useful plugin API
 - Emoji support
-- Compatible with IE10+
+- Compatible with IE11
 - Support server-side rendering ([example](https://github.com/docsifyjs/docsify-ssr-demo))
 
 ## Examples
 
-Check out the [Showcase](https://github.com/docsifyjs/docsify/#showcase) to see docsify in use.
+Check out the [Showcase](https://github.com/docsifyjs/awesome-docsify#showcase) to see docsify in use.
 
 ## Donate
 
@@ -30,3 +30,9 @@ Please consider donating if you think docsify is helpful to you or that my work 
 ## Community
 
 Users and the development team are usually in the [Gitter chat room](https://gitter.im/docsifyjs/Lobby).
+
+## Special Thanks
+
+_Vercel_ has given us a Pro account.
+
+<a href="https://vercel.com/?utm_source=docsifyjsdocs" target="_blank"><img src="_media/vercel_logo.svg" width="100px"></a>
