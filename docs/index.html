@@ -14,10 +14,14 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css" title="dark" disabled>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/buble.css" title="buble" disabled>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/pure.css" title="pure" disabled>
-
+  <script src="//cdn.jsdelivr.net/npm/docsify-plugin-carbon@1.0.1/index.min.js"></script>
 	<style>
 		nav.app-nav li ul {
 			min-width: 100px;
+		}
+
+    #carbonads {
+			box-shadow: none !important;
 		}
 	</style>
 </head>
@@ -33,7 +37,8 @@
         '/zh-cn/(.*)': 'https://cdn.jsdelivr.net/gh/docsifyjs/docs-zh@master/$1',
         '/de-de/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-de/master/$1',
         '/ru-ru/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-ru/master/$1',
-        '/es/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-es/master/$1'
+        '/es/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-es/master/$1',
+        '/write-a-plugin': 'https://raw.githubusercontent.com/docsifyjs/docsify/master/docs/write-a-plugin.md'
       },
       auto2top: true,
       coverpage: true,
@@ -62,8 +67,8 @@
           '/': 'Search'
         }
       },
-      formatUpdated: '{MM}/{DD} {HH}:{mm}',
       plugins: [
+        DocsifyCarbon.create('CEBI6KQE', 'docsifyjsorg'),
         function (hook, vm) {
           hook.beforeEach(function (html) {
             if (/githubusercontent\.com/.test(vm.route.file)) {
